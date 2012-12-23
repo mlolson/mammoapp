@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--{% load dajaxice_templatetags %}-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logged In</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+<h1>Breast Imaging Web Simulator (beta)</h1>
+<br>
+<a class='homelinks' href="/mammointro/">Start Mammoapp module</a> <br><br>
+<a class='homelinks' href="/mammoupload/">Upload mammogram training set</a> <br><br>
+<p>Logged in as {{ username }}<a class='homelinks' href="/accounts/logout/">Log Out</a></p> 
+</body>
+</html>

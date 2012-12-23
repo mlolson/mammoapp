@@ -1,0 +1,49 @@
+{% extends "registration/base.html" %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+
+  <h1>Create an account</h1>
+  
+  {% if form.errors %}
+  <div class="errors">Please correct the errors below: {{ form.non_field_errors }}</div>
+  {% endif %}
+  <form method="post" action="" class="wide">
+	{% csrf_token %}   
+      <label for="id_username">Username:</label><br>
+      {{ form.username }}
+      {% if form.username.errors %}
+      {{ form.username.errors.as_text }}
+      {% endif %}  
+   	<br>
+      <label for="id_email">Email:</label><br>
+      {{ form.email }}
+      {% if form.email.errors %}
+      {{ form.email.errors.as_text }}
+      {% endif %}
+    <br>   
+      <label for="id_password1">Password:</label><br>
+      {{ form.password1 }}
+      {% if form.password1.errors %}
+        {{ form.password1.errors.as_text }}
+      {% endif %}
+    <br>   
+      <label for="id_password2">Retype Password:</label><br>
+      {{ form.password2 }}
+      {% if form.password2.errors %}
+      {{ form.password2.errors.as_text }}
+      {% endif %}
+    <br>
+    <p class="submit"><input type="submit" value="Register &rarr;"></p>
+  </form>
+  
+{% endblock %}
+
+{% block content-related %}
+<p>Fill out the form to the left (all fields are required), and you'll be sent an email with instructions on how
+to finish your registration.</p>
+
+<p>We'll only use your email to send you signup instructions.</p>
+
+{% endblock %}
