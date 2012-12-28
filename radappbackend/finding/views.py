@@ -62,6 +62,7 @@ def submit(request):
 def getType(request):
     return HttpResponse()
 
+<<<<<<< HEAD
 def score(request,numCorrect,numTotal):
     
     if not request.user.is_authenticated():
@@ -75,3 +76,5 @@ def score(request,numCorrect,numTotal):
     return HttpResponse(t.render(c))
     
 
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6

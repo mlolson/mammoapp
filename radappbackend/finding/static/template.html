@@ -13,6 +13,10 @@
 </head>
 <body>
 <form id="findingForm">
+<<<<<<< HEAD
+=======
+	<!-- be sure to add "submit" funcitonality-->
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 <input type="button" class="formelement" name="Prev" value="Prev" onclick=gotoPrevFinding()>
 <b id='finding_indicator'>Finding: 0/0</b>
 <!--<select name="findingsList" id="findingsDrop"></select>-->
@@ -25,6 +29,7 @@
 Description: <br>
 <textarea name="description"  class="formelement" id="description_box" cols="25" rows="5"> </textarea><br>
 <input type="button" name="save_Finding"  class="formelement" id="saveFindingButton" value="Save" onclick=saveFinding()>
+<<<<<<< HEAD
 <input type="button" name="save_and_close_finding"  class="formelement" id="saveAndCloseFindingButton" value="Save & Close" onclick=saveAndCloseFinding()>
 <input type="button" name="delete_Finding"  class="formelement" id="deleteFindingButton" value="Delete" onclick=deleteFinding()>
 
@@ -76,6 +81,40 @@ Guess Final Pathology<br>
 <!-- <button type="button" class='button' id="ccViewButton" onclick=ccView()>CC view</button>
 <button type="button" class='button' id="mloViewButton" onclick=mloView()>MLO view</button>
 <button type="button" class='button' id="nextImageButton" onclick=nextImage()>Next Image</button> -->
+=======
+<input type="button" name="close_Finding"  class="formelement" id="closeFindingButton" value="Close" onclick=closeFindingForm()>
+</form>
+<form id="impressionsForm">
+	<!-- be sure to add "submit" funcitonality-->
+Impressions Form
+<hr>
+Findings<br>
+<div id="findingsList"></div>
+<hr>
+BIRADS Category
+<input type="radio" class="formelement" name="group1" value="BR0"> 0
+<input type="radio" class="formelement" name="group1" value="BR1"> 1
+<input type="radio" class="formelement" name="group1" value="BR2"> 2
+<input type="radio" class="formelement" name="group1" value="BR3"> 3
+<input type="radio" class="formelement" name="group1" value="BR4"> 4
+<input type="radio" class="formelement" name="group1" value="BR5"> 5
+<input type="radio" class="formelement" name="group1" value="BR6"> 6
+<hr>
+Impression <br>
+<textarea name="impression" id="impressions_box" cols="60" rows="5"> </textarea><br>
+<input type="button" class="formelement" name="save_Impression" id="saveFindingButton" value="Save">
+<input type="button" class="formelement" name="submit_Impression" id="saveFindingButton" value="Save & Submit">
+<input type="button" class="formelement" name="close_Impression" id="closeImpressionButton" value="Close" onclick=closeImpressionForm()>
+</form>
+
+<button type="button"id="drawRectRoiButton" onclick=DefineROIbuttonHandler_rectangle()>Draw Rect ROI</button>
+<button type="button"id="drawPolyRoiButton" onclick=DefineROIbuttonHandler_polygon()>Draw Poly ROI</button>
+<button type="button"id="spotMagButton" onclick=SpotMagTool()>Spot Mag Tool</button>
+<button type="button"id="impressionButton" onclick=constructImpressionsForm()>Show Impression</button>
+<button type="button"id="ccViewButton" onclick=ccView()>CC view</button>
+<button type="button"id="mloViewButton" onclick=mloView()>MLO view</button>
+<button type="button"id="nextImageButton" onclick=nextImage()>Next Image</button>
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 <div style="position:relative; top: 0px; left: 0px;">
 <canvas id="canvas_bottom" width="800" height="600" style="position:absolute;">
  Your browser does not support HTML5 Canvas. old:canvas id="canvas" width="1024" height="2560"

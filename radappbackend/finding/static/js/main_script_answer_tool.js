@@ -3,7 +3,10 @@ var imgM = new Image();
 
 var setNum = 1;
 var imageNum = 1;
+<<<<<<< HEAD
 var maxImgNum = 1;
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 
 window.addEventListener('load', eventWindowLoaded, false);
 
@@ -61,6 +64,10 @@ var check3;
 //All findings on client side
 var findings = new Array();
 var answerfindings = new Array();
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 var dragCoordsStart=new Array(); 
 
 function eventWindowLoaded() {
@@ -198,10 +205,13 @@ function initialize(){
 	answerfindings=new Array();
 	windowX=0;
 	windowY=0;  
+<<<<<<< HEAD
 	
 	//Get the max image number for this set from the server
 	Dajaxice.finding.getMaxImageNum(callback_setMaxImgNum,{"setNum":setNum})
 
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	drawScreen();  	
 }
 function drawScreen() {
@@ -608,7 +618,10 @@ function defineFingingOtherView(){
 		mloView();
 	}
 	UpdateFinding = true;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	closeFindingForm();
 }
 function SaveROIbuttonHandler(e){
@@ -685,10 +698,13 @@ function mloView(){
 }
 function nextImage(){
 	imageNum++;	
+<<<<<<< HEAD
 	if(imageNum > maxImgNum){	
 		imageNum = 1;
 	}
 	
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	imgC.src = window.STATIC_URL+"media/set"+setNum+"/"+(imageNum)+"c.jpg";
     imgM.src = window.STATIC_URL+"media/set"+setNum+"/"+(imageNum)+"m.jpg";
  	
@@ -737,6 +753,7 @@ function findingDropdownChangeHandler(){
 	return true;
 }
 function closeFindingForm(){
+<<<<<<< HEAD
 	saveAnswerFinding();
 	document.getElementById("findingForm").style.visibility = "hidden";
 	drawScreen();
@@ -749,6 +766,9 @@ function deleteAnswerFinding(){
 		answerfindings[i].findingNum = (i);
 	}
 	findingDropdownChangeHandler();
+=======
+	document.getElementById("findingForm").style.visibility = "hidden";
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 function AnswerFinding() {
 	
@@ -781,10 +801,13 @@ function AnswerFinding() {
 		this.imgN = imageNum;
 		this.setN = setNum;
 		this.findingNum = fNum;
+<<<<<<< HEAD
 		this.xMLO=-1;
 		this.yMLO=-1;
 		this.xCC=-1;
 		this.yCC=-1;
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	}
 	function updateFinding(view,x,y){
 		var xx = (x-windowX)/zoomFactor;
@@ -911,7 +934,13 @@ function addAnswerFinding(create,view,x,y){
  		answerfindings[selectedFinding].updateFinding(view,x,y);
  	}
 }
+<<<<<<< HEAD
 
+=======
+function saveAnswerFindings(){
+	
+}
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 function addFinding()
   {
   var type = "";
@@ -972,6 +1001,7 @@ function message_callback(data){
   //document.getElementById("check1").checked=!document.getElementById("check1").checked;
   console.log(data.message);
 }
+<<<<<<< HEAD
 function submitAnswerFindingsAndImpression(){
 	sendAnswerFindingsToServer();
 	sendAnswerImpressionToServer();
@@ -1003,6 +1033,8 @@ function sendAnswerImpressionToServer(){
 	var params = {"imageNum":imageNum,"setNum":setNum,"biradsNum":biradsNum,"description":description,"finalPathology":finalPathology};
 	Dajaxice.finding.addAnswerImpression(message_callback,params);
 }
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 function sendFindingToServer(numToSend){	
 	var f = findings[numToSend];
 	//Need to convert xArr, yArr to csv strings?
@@ -1053,10 +1085,22 @@ function callback_updateFindingForm(data){
   console.log(data.message);
   findingDropdownChangeHandler();
 }
+<<<<<<< HEAD
 function callback_setMaxImgNum(data){
 	maxImgNum = data.maxImageNum;
 	console.log("Max Image Num set to "+maxImgNum);
 }
 function message_callback(data){
   console.log(data.message);  
+=======
+
+function my_js_callback2(data){
+  check1.checked=!check1.checked;
+  var s = "";
+  var i;
+  for(i=0;i<data.fnumbers.length;i++){ s += data.fnumbers[i]+ "  "}
+
+  console.log(s);
+  
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }

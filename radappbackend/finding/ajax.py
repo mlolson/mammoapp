@@ -42,7 +42,11 @@ def addFinding(request,type,description,npts,xArr,yArr):
 dajaxice_functions.register(addFinding)
 
 @dajaxice_register
+<<<<<<< HEAD
 def addAnswerFinding(request,imageNum,setNum,findingNum,isCCView,isMLOView,xLocCC,yLocCC,xLocMLO,yLocMLO,ftype,description):
+=======
+def addAnswerFinding(request,imageNum,setNum,findingNum,type,description,npts,xCC,yCC,xMLO,yMLO,isCC,isMLO):
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
     message="";
     
     try:
@@ -51,11 +55,16 @@ def addAnswerFinding(request,imageNum,setNum,findingNum,isCCView,isMLOView,xLocC
         message = "set does not exist"
         return simplejson.dumps({'message':message})   
     try:
+<<<<<<< HEAD
         image = Image.objects.get(imageNum=imageNum,set=set)
+=======
+        image = Image.objects.get(imageNum=imageNum,setNum=setNum)
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
     except Image.DoesNotExist:
         message = "image does not exist"
         return simplejson.dumps({'message':message})      
 
+<<<<<<< HEAD
     newFind = AnswerFinding(image=image,setNum=setNum,findingNum=findingNum,isCCView=isCCView,isMLOView=isMLOView,xLocCC=xLocCC,yLocCC=yLocCC,xLocMLO=xLocMLO,yLocMLO=yLocMLO,type=ftype,description=description)
     newFind.save()   
     message = "success"
@@ -94,6 +103,13 @@ def getMaxImageNum(request,setNum):
     image_list = set.image_set.all()
     maxNum = len(image_list)
     return simplejson.dumps({"maxImageNum":maxNum})
+=======
+    newFind = AnswerFinding(findingNum=findingNum,setNum=setNum,image=image,isCCView=isCC,isMLOView=isMLO,xLocCC=xCC,yLocCC=yCC,xLocMLO=xMLO,yLocMLO=yMLO,type=type,description=description)
+    newFind.save()   
+    message = "success"
+    return simplejson.dumps({'message':message})
+dajaxice_functions.register(addAnswerFinding)
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 
 @dajaxice_register
 def updateFinding(request,findingNum,type,description,npts,xArr,yArr):
@@ -148,6 +164,7 @@ def deleteAllFindings(request):
         
     return simplejson.dumps({'message':"alldelete",'fnumbers': data})
 
+<<<<<<< HEAD
 @dajaxice_register
 def returnAllAnswerFindings(request,setNum,imageNum):
     #returns answer impression too.
@@ -187,3 +204,5 @@ def returnAllAnswerFindings(request,setNum,imageNum):
 
 
 
+=======
+>>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
