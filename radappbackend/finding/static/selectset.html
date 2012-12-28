@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--{% load dajaxice_templatetags %}-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logged In</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+<h1>Breast Imaging Web Simulator (beta)</h1>
+<br>
+<div id="homeButtons">
+Select Case Set:
+<button type="button" id="b1" class='button' style="width:250px" onclick="window.location.href='/mammointro/'">Start Mammoapp Module</button><br>
+<button type="button" id="b2" class='button' style="width:250px"  onclick="window.location.href='/mammoupload/'">Upload Training Set</button>
+</div>
+<p><br><br>Logged in as {{ username }}  <a class='homelinks' href="/accounts/logout/">Log Out</a></p> 
+</body>
+</html>

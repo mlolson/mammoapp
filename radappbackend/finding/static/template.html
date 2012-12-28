@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load dajaxice_templatetags %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Test Template</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css">
+<script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<script type="text/javascript"src="{{STATIC_URL}}js/main_script.js"></script>
+{% dajaxice_js_import %}
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+<form id="findingForm">
+<input type="button" class="formelement" name="Prev" value="Prev" onclick=gotoPrevFinding()>
+<b id='finding_indicator'>Finding: 0/0</b>
+<!--<select name="findingsList" id="findingsDrop"></select>-->
+<input type="button" class="formelement" name="Next" value="Next" onclick=gotoNextFinding()>
+<br>
+<!--<input type="button" name="defineROIbutton" id="defineROIbutton" value="Define ROI" onclick=DefineROIbuttonHandler()><br>-->
+<input type="checkbox" id="check1" class="formelement" name="mass" value="mass">Mass
+<input type="checkbox" id="check2" class="formelement" name="calcifications" value="calcs" >Calcifications
+<input type="checkbox" id="check3" class="formelement" name="other" value="other" >Other Suspicious Abnormality<br>
+Description: <br>
+<textarea name="description"  class="formelement" id="description_box" cols="25" rows="5"> </textarea><br>
+<input type="button" name="save_Finding"  class="formelement" id="saveFindingButton" value="Save" onclick=saveFinding()>
+<input type="button" name="save_and_close_finding"  class="formelement" id="saveAndCloseFindingButton" value="Save & Close" onclick=saveAndCloseFinding()>
+<input type="button" name="delete_Finding"  class="formelement" id="deleteFindingButton" value="Delete" onclick=deleteFinding()>
+
+</form>
+<form id="impressionsForm">
+Impressions Form
+<hr>
+<div id="findingsHeader"></div>
+<div id="findingsList"></div>
+<div id="answerFindingsList"></div>
+<hr>
+<div id="biradsDiv">
+Choose BIRADS Category
+<input type="radio" class="formelement" name="radio1" value=0> 0
+<input type="radio" class="formelement" name="radio1" value=1> 1
+<input type="radio" class="formelement" name="radio1" value=2> 2
+<input type="radio" class="formelement" name="radio1" value=3> 3
+<input type="radio" class="formelement" name="radio1" value=4> 4
+<input type="radio" class="formelement" name="radio1" value=5> 5
+<input type="radio" class="formelement" name="radio1" value=6> 6
+</div>
+<hr>
+<div id="impressionDiv">
+Impression <br>
+<textarea name="impression" id="impressions_box" cols="60" rows="5"></textarea><br>
+</div>
+<div id="indicationsDiv">
+Indications<br>
+<textarea name="indications" id="indications_box" cols="60" rows="1"></textarea><br>
+</div>
+<div id="finalPathologyDiv">
+Guess Final Pathology<br>
+<textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea><br>
+</div>
+<div id="formFooter">
+<input type="button" class="formelement" name="save_Impression" id="saveFindingButton" value="Save">
+<input type="button" class="formelement" name="submit_Impression" id="saveAndSubmitImpressionButton" value="Save & Submit" onclick=checkFindingAnswers()>
+<input type="button" class="formelement" name="close_Impression" id="closeImpressionButton" value="Close" onclick=closeImpressionForm()>
+<input type="button" class="formelement" name="next_case" id="nextCaseButton" value="Next Case" disabled=true onclick=nextImage()>
+</div>
+</form>
+
+<button type="button" class='button' id="drawRectRoiButton" onclick=DefineROIbuttonHandler_rectangle()>Rect ROI</button>
+<button type="button" class='button' id="drawPolyRoiButton" onclick=DefineROIbuttonHandler_polygon()>Poly ROI</button>
+<button type="button" class='button' id="spotMagButton" onclick=SpotMagTool()>Spot Mag</button>
+<button type="button" class='button' id="impressionButton" onclick=constructImpressionsForm()>Show Impression</button>
+<button type="button" class='button' id='zoomOutButton' onclick=zoomOut()>-</button>
+<button type="button" class='button' id='zoomInButton' onclick=zoomIn()>+</button>
+<!-- <button type="button" class='button' id="ccViewButton" onclick=ccView()>CC view</button>
+<button type="button" class='button' id="mloViewButton" onclick=mloView()>MLO view</button>
+<button type="button" class='button' id="nextImageButton" onclick=nextImage()>Next Image</button> -->
+<div style="position:relative; top: 0px; left: 0px;">
+<canvas id="canvas_bottom" width="800" height="600" style="position:absolute;">
+ Your browser does not support HTML5 Canvas. old:canvas id="canvas" width="1024" height="2560"
+</canvas>
+<canvas id="canvas_top" width="800" height="600" style="position:absolute; border: black 1px solid"></canvas>
+<canvas id="canvas_obox1" width="0" height="0" style="border: black 1px solid"></canvas>
+<canvas id="canvas_obox2" width="0" height="0" style="border: black 1px solid"></canvas>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--{% load dajaxice_templatetags %}-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Score</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+<h1>Finished!</h1>
+<p>
+
+You found {{ numCorrect }} out of {{ numTotal }} findings in 5 cases. <br> 
+
+Nice work!<br> <br> 
+
+Have suggestions? Comments? Feed back is appreciated:<br> <br> 
+
+email Matt Olson: mattlolson@gmail.com<br> <br> 
+
+<a class='homelinks' href="/">Return Home</a> <br><br>
+
+</p>
+</body>
+</html>
