@@ -26,11 +26,7 @@ urlpatterns = patterns('',
     url(r'^mammo/$', 'finding.views.mammo'),
     url(r'^answers/$', 'finding.views.answerform'),
     url(r'^$', 'finding.views.home'),
-<<<<<<< HEAD
     (r'^mammo/score/(\d{1})/(\d{1})/$', 'finding.views.score'),
-=======
-    
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
     #url(r'^form/$', 'finding.views.form'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

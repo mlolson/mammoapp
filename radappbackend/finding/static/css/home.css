@@ -104,23 +104,15 @@ h1{
 	top:0px;	
 	font:"Arial Black" 20pt bold;
 }
-<<<<<<< HEAD
 
 h2{
 	position:relative;
 	left:50px;
 	width:700px;	
-=======
-.homelinks{
-	position:relative;
-	left:50px;
-	top:0px;
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 p{
 	position:relative;
 	left:50px;
-<<<<<<< HEAD
 	width:700px;
 }
 #homeButtons{
@@ -158,9 +150,6 @@ p{
    background: #1b435e;
    }
 
-=======
-}
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 
 
 
@@ -353,10 +342,7 @@ p{
     h3 {
         orphans: 3;
         widows: 3;
-<<<<<<< HEAD
         left:50px;
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
     }
 
     h2,

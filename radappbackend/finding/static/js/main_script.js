@@ -3,10 +3,7 @@ var imgM = new Image();
 
 var setNum = 1;
 var imageNum = 1;
-<<<<<<< HEAD
 var MaxImgNum = 1;
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 
 window.addEventListener('load', eventWindowLoaded, false);
 
@@ -16,14 +13,11 @@ var windowHeight = 3328;
 var canvasWidth;
 var canvasHeight;
 
-<<<<<<< HEAD
 //Score keeping
 var TotalNumOfFindings =0;
 var TotalNumOfCorrectFindings =0;
 //********************************
 
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 var windowX = 0;
 var windowY = 0;
 var zoomFactor = 0.15;
@@ -52,10 +46,7 @@ var isPolyRoiDrawing = false;
 var isRectRoiDrawing = false;
 var isSpotMagTool = false;
 var viewCM = false; //false for cc view, true for mlo view.
-<<<<<<< HEAD
 var DisplayAnswers = false;
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 
 var imgCLoaded = false;
 var imgMLoaded = false;
@@ -69,20 +60,14 @@ var description_box;
 var check1;
 var check2;
 var check3;
-<<<<<<< HEAD
 var FindingsBox;
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 //var theCanvas_3;
 
 //All findings on client side
 var findings = new Array();
-<<<<<<< HEAD
 var answerfindings = new Array();
 var Answer_Impression;
 var User_Impression;
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 
 var dragCoordsStart=new Array(); 
 
@@ -151,12 +136,8 @@ function initialize(){
     console.log("cdim "+canvasWidth+","+canvasHeight);
     //var addFindingButton = document.getElementById("addFindingButton");
     //var defineROIbutton = document.getElementById("defineROIbutton");
-<<<<<<< HEAD
     
     FindingsBox = document.getElementById("findingForm");
-=======
-    var findingDropdown = document.getElementById("findingsDrop");
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
     //defineROIbutton= document.getElementById("defineROIbutton");
     description_box = document.getElementById("description_box");
     check1 = document.getElementById("check1");
@@ -217,7 +198,6 @@ function initialize(){
 	zoomFactor = canvasWidth/windowWidth;
 	//minZoom = canvasWidth/windowWidth;
 	windowX=0;
-<<<<<<< HEAD
 	windowY=0; 
 	DisplayAnswers = false;
 	Answer_Impression = new AnswerImpression(false,"","","",-1);
@@ -230,10 +210,6 @@ function initialize(){
 	User_Impression.init();
 	Answer_Impression.init();
 	drawScreen(); 
-=======
-	windowY=0;  
-	drawScreen();  	
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 function drawScreen() {
 
@@ -257,16 +233,10 @@ function drawScreen() {
     	drawScreen_top_only();
     }else if(findings.length>0 && findings[selectedFinding].wasJustCompleted){   	
 		findings[selectedFinding].wasJustCompleted = false;
-<<<<<<< HEAD
 		isPolyRoiDrawing=false;
 		isROIdrawing = false;
 		drawScreen_top_only();
 		findingDropdownChangeHandler(false,200,50);	
-=======
-		drawScreen_top_only();
-		findingDropdownChangeHandler();	
-		console.log("bitchin");
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
     	//context.stroke();
     }else{
     	//context.font = "bold 18px sans-serif";
@@ -336,7 +306,6 @@ function drawScreen_top_only(){
 		}
 	}
 	
-<<<<<<< HEAD
 	if(DisplayAnswers){
 		
 		for(i=0;i<answerfindings.length;i++){
@@ -395,8 +364,6 @@ function drawScreen_top_only(){
 	}
 	
 	
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	drawOBox();
 
 }
@@ -406,10 +373,7 @@ function drawOBox(){
 	
     var iHeight = imgC.height;
 	var iWidth = imgC.width;
-<<<<<<< HEAD
 	var i;
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	//console.log("ch, cw = "+iHeight+","+iWidth);
 	
 	context_obox1.drawImage(imgC, 0,0 , iWidth, iHeight,0, 0,(iWidth)/orientMag,(iHeight)/orientMag);
@@ -449,7 +413,6 @@ function drawOBox(){
 		
 	}
 	
-<<<<<<< HEAD
 	if(DisplayAnswers){
 		for(i=0;i<answerfindings.length;i++){
 			if(answerfindings[i].isCC){
@@ -472,8 +435,6 @@ function drawOBox(){
 		
 	}
 	
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 
 function drawSpotMag(x,y){
@@ -514,14 +475,9 @@ function MouseUpHandler(e){
 		isROIdrawing=false;
 		isRectRoiDrawing=false;
 		findings[selectedFinding].isClosed = true;
-<<<<<<< HEAD
 		findings[selectedFinding].wasJustCompleted = true;		
 		drawScreen();
 		findingDropdownChangeHandler(false,250,200);	
-=======
-		findings[selectedFinding].wasJustCompleted = true;
-		drawScreen();
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	}
 	//else{
 		isDragging = false;	
@@ -539,13 +495,8 @@ function MouseDownHandler(e){
 		console.log("sx sy "+e.layerX+","+e.layerY);
 		//windowX = (canvasWidth-(zoomFactor*windowWidth)) + (((windowWidth/orientMag-(e.layerX)))*zoomFactor*orientMag) - canvasWidth/2;
 		//windowY = (canvasHeight-(zoomFactor*windowHeight)) + ((windowHeight/orientMag- (e.layerY))*zoomFactor*orientMag) - canvasHeight/2;
-<<<<<<< HEAD
 		windowX = (canvasWidth-(zoomFactor*windowWidth)) + (((windowWidth/orientMag-(e.layerX)))*zoomFactor*orientMag) - canvasWidth/2;
 		windowY = (canvasHeight-(zoomFactor*windowHeight)) + ((windowHeight/orientMag- (e.layerY))*zoomFactor*orientMag) - canvasHeight/2;
-=======
-		windowX = (canvasWidth-(zoomFactor*windowWidth)) + (((windowWidth/orientMag-(e.layerX +80)))*zoomFactor*orientMag) - canvasWidth/2;
-		windowY = (canvasHeight-(zoomFactor*windowHeight)) + ((windowHeight/orientMag- (e.layerY +2))*zoomFactor*orientMag) - canvasHeight/2;
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 		
 		dragCoordStart = [e.screenX,e.screenY];
 		drawScreen();
@@ -557,33 +508,13 @@ function MouseDownHandler(e){
 		windowHeight = imgM.height;
 		windowWidth = imgM.width;	
 		console.log(" "+e.layerX+","+e.layerY);
-<<<<<<< HEAD
 		windowX = (canvasWidth-(zoomFactor*windowWidth)) + (((windowWidth/orientMag-(e.layerX)))*zoomFactor*orientMag) - canvasWidth/2;
 		windowY = (canvasHeight-(zoomFactor*windowHeight)) + ((windowHeight/orientMag- (e.layerY))*zoomFactor*orientMag) - canvasHeight/2;
-=======
-		windowX = (canvasWidth-(zoomFactor*windowWidth)) + (((windowWidth/orientMag-(e.layerX +80)))*zoomFactor*orientMag) - canvasWidth/2;
-		windowY = (canvasHeight-(zoomFactor*windowHeight)) + ((windowHeight/orientMag- (e.layerY +29))*zoomFactor*orientMag) - canvasHeight/2;
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 		dragCoordStart = [e.screenX,e.screenY];
 		drawScreen();
 		return;
 	}
 	
-<<<<<<< HEAD
-=======
-	/*if(isInOrientationBox(e.layerX,e.layerY)){
-		//needs refactoring
-		isDragging = true;
-		windowX = (canvasWidth-(zoomFactor*windowWidth)) + (((windowWidth/orientMag-(e.layerX-orientX)))*zoomFactor*orientMag) - canvasWidth/2;
-		windowY = (canvasHeight-(zoomFactor*windowHeight)) + ((windowHeight/orientMag- e.layerY)*zoomFactor*orientMag) - canvasHeight/2;
-		dragCoordStart = [e.screenX,e.screenY];
-		drawScreen();
-		return;
-	}*/
-	//}else if(isROIdrawing){
-		//console.log("1");
-	
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	if(isPolyRoiDrawing){
 		isDragging = false;
 		isROIdrawing = true;
@@ -593,10 +524,7 @@ function MouseDownHandler(e){
 		}else{
 			isROIdrawing = false;
 			isPolyRoiDrawing = false;
-<<<<<<< HEAD
 			//findingDropdownChangeHandler(false,250,60);	
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 		}
 		drawScreen();
 		return;
@@ -619,11 +547,7 @@ function MouseDownHandler(e){
 	//If finding was clicked center on that location.
 	if(ret >=0){
 		selectedFinding = ret;
-<<<<<<< HEAD
 		findingDropdownChangeHandler(false,250,60);
-=======
-		findingDropdownChangeHandler();
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	}
 	
     //isDragging = true;
@@ -663,11 +587,7 @@ function MouseLeaveHandler(){
 	//console.log("leave");
 	isROIdrawing=false;
 	isRectRoiDrawing=false;
-<<<<<<< HEAD
 	//isPolyRoiDrawing=false;
-=======
-	isPolyRoiDrawing=false;
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	isDragging = false;
 }
 function isFindingClicked(x,y){
@@ -681,11 +601,7 @@ function isFindingClicked(x,y){
 			var yo = findings[i].yArr[0];
 			//console.log("xo,yo= "+xo+","+yo);
 			//console.log("xc,yc= "+x+","+y);
-<<<<<<< HEAD
 	    	if(xx >xo && yy>yo && xx< xo+(20/zoomFactor) && yy< yo+(20/zoomFactor))
-=======
-	    	if(findings[i].isClosed && xx >xo && yy>yo && xx< xo+(20/zoomFactor) && yy< yo+(20/zoomFactor))
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	    	{
 	    	return i;
 	    	}
@@ -702,11 +618,7 @@ function gotoPrevFinding(){
 		selectedFinding--;
 		if(selectedFinding<0){selectedFinding=findings.length-1;}
 		drawScreen();
-<<<<<<< HEAD
 		findingDropdownChangeHandler(false,250,60);
-=======
-		findingDropdownChangeHandler();
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	}
 }
 function gotoNextFinding(){
@@ -714,11 +626,7 @@ function gotoNextFinding(){
 		selectedFinding++;
 		if(selectedFinding>findings.length-1){selectedFinding = 0;}
 		drawScreen();
-<<<<<<< HEAD
 		findingDropdownChangeHandler(false,200,50)
-=======
-		findingDropdownChangeHandler()
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	}
 }
 
@@ -755,7 +663,6 @@ function SpotMagTool(){
 	isSpotMagTool=true;
 }
 function constructImpressionsForm(){
-<<<<<<< HEAD
 	var fdiv = document.getElementById("findingsList");
 	var afdiv = document.getElementById("answerFindingsList");
 	var findingsHeaderDiv = document.getElementById("findingsHeader");
@@ -930,28 +837,10 @@ function constructImpressionsForm(){
 	document.getElementById("impressionsForm").style.visibility = 'visible';
 	
 	
-=======
-	var form = document.getElementById("impressionsForm");
-	var fdiv = document.getElementById("findingsList");
-	
-	fdiv.innerHTML = "";
-	var i;
-	for(i=0;i<findings.length;i++){
-		
-		var newDiv = document.createElement('div');
-		newDiv.innerHTML = "Finding "+(findings[i].findingNum+1)+"<br>"+
-							"Type: "+findings[i].type+ "<br>"+
-							"Description: "+findings[i].description+"<hl>";
-		
-		fdiv.appendChild(newDiv);
-	}
-	form.style.visibility = 'visible';
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 function closeImpressionForm(){
 	document.getElementById("impressionsForm").style.visibility = 'hidden';
 }
-<<<<<<< HEAD
 //********************ANSWER CHECKING FUNCTIONS****************************
 function checkFindingAnswers(){	
 	
@@ -1039,8 +928,6 @@ function AnswerFinding(imgN,setN,findingNum,isCC,isMLO,xCC,yCC,xMLO,yMLO,type,de
 	this.corFinding=corFinding;
 }
 //*************************************************************************
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 function ccView(){
 	isPolyRoiDrawing = false;
 	isRectRoiDrawing = false;
@@ -1061,7 +948,6 @@ function mloView(){
 	drawScreen();
 	
 }
-<<<<<<< HEAD
 function zoomOut(){
 	zoomFactor = zoomFactor -0.4;
 	
@@ -1089,15 +975,10 @@ function nextImage(){
 		return;
 	}
 	
-=======
-function nextImage(){
-	imageNum++;
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	imgC.src = window.STATIC_URL+"media/set"+setNum+"/"+(imageNum)+"c.jpg";
     imgM.src = window.STATIC_URL+"media/set"+setNum+"/"+(imageNum)+"m.jpg";
  	
 }
-<<<<<<< HEAD
 function findingDropdownChangeHandler(updatePos,x,y){
 	//var dropdown = document.getElementById("findingsDrop");
 	if(findings.length==0){
@@ -1109,14 +990,6 @@ function findingDropdownChangeHandler(updatePos,x,y){
   	//s = "nums: ";
   	var option;
   	FindingsBox.style.visibility = "visible";
-=======
-function findingDropdownChangeHandler(){
-	//var dropdown = document.getElementById("findingsDrop");
-	var i;
-  	//s = "nums: ";
-  	var option;
-  	document.getElementById("findingForm").style.visibility = "visible";
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
   	//dropdown.options.length = 0;  	
   //console.log("data length = "+data.fnumbers.length);
   	//for(i=0;i<findings.length;i++){
@@ -1126,14 +999,11 @@ function findingDropdownChangeHandler(){
 	//	//s += data.fnumbers[i]+" ";
  	//}
   	//console.log(s);
-<<<<<<< HEAD
   	if(updatePos){
   		FindingsBox.style.left = x+"px";
   		FindingsBox.style.top = y+"px";
   	}
   	
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	document.getElementById('finding_indicator').innerHTML = "Finding: "+ (selectedFinding+1) +"/" +findings.length;	
 	
 	if(findings.length==0){
@@ -1163,11 +1033,7 @@ function findingDropdownChangeHandler(){
 	return true;
 }
 function closeFindingForm(){
-<<<<<<< HEAD
 	FindingsBox.style.visibility = "hidden";
-=======
-	document.getElementById("findingForm").style.visibility = "hidden";
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 
 function Finding() {
@@ -1184,13 +1050,9 @@ function Finding() {
 	  this.syncedWithServer;
 	  this.wasJustCompleted;
 	  this.view;
-<<<<<<< HEAD
 	  this.corAnswerNums;
 	  this.roiContainsAnswer=roiContainsAnswer;
 	  
-=======
-	
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	  this.init=init;
 	  this.addPoint=addPoint;
 	  this.removeLastPoint=removeLastPoint;
@@ -1198,11 +1060,7 @@ function Finding() {
 	  this.getYarr=getYarr;
 	  this.getNpoints=getNpoints;
 	  this.addRect=addRect;
-<<<<<<< HEAD
 	  
-=======
-
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	  function init(fNum){
 	  	this.n=0;
 	  	this.xArr = new Array();
@@ -1214,21 +1072,14 @@ function Finding() {
 	  	this.syncedWithServer=false;
 	  	this.wasJustCompleted=false;
 	  	this.view = viewCM;
-<<<<<<< HEAD
 	  	this.corAnswerNums=new Array();
-=======
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	  }    
 	 function addPoint(x,y){
 	  	this.xArr[this.n] = (x-windowX)/zoomFactor;
 	  	this.yArr[this.n] = (y-windowY)/zoomFactor;  	
 	  	//Check to see if ROI should be closed.
 	  	if(this.n > 2){
-<<<<<<< HEAD
 	  		if((Math.abs(this.xArr[0] - this.xArr[this.n]) + Math.abs(this.yArr[0] - this.yArr[this.n])) < 30/zoomFactor){
-=======
-	  		if((Math.abs(this.xArr[0] - this.xArr[this.n]) + Math.abs(this.yArr[0] - this.yArr[this.n])) < 100){
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	  			this.xArr[this.n] = this.xArr[0];
 	  			this.yArr[this.n] = this.yArr[0];
 	  			this.isClosed = true;
@@ -1271,7 +1122,6 @@ function Finding() {
 	  function getNpoints(){
 	  	return this.n;
 	  }
-<<<<<<< HEAD
 	  function roiContainsAnswer(answerFinding){
 		  var xx;
 		  var yy;
@@ -1299,10 +1149,6 @@ function Finding() {
 }
 
 
-=======
-}
-
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 //***********************************AJAX**********************************
 function getAllFindingsFromServer(){
 	
@@ -1348,7 +1194,6 @@ function saveFinding(){
 	}else if(mass){findings[selectedFinding].type = "mass";
 	}else if(other){findings[selectedFinding].type = "other";}
 		
-<<<<<<< HEAD
 	//sendFindingToServer(selectedFinding);
 	
 }
@@ -1377,16 +1222,6 @@ function deleteFinding()
 	findingDropdownChangeHandler();
 	
 		
-=======
-	sendFindingToServer(selectedFinding);
-	
-}
-function deleteFinding()
-  {
-  var dropdown = document.getElementById("findingsDrop");
-  Dajaxice.finding.deleteFinding(callback_deleteFindingForm,{'numToDelete':(dropdown.options[dropdown.selectedIndex].text)});
-  //getFindings();
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
   }
 function message_callback(data){
   //document.getElementById("check1").checked=!document.getElementById("check1").checked;
@@ -1406,11 +1241,7 @@ function callback_deleteAllFindingsForm(data){
 function callback_sendFindingToServer(data){
 	if(data.success ==1){
 		findings[data.numUpdated].syncedWithServer=true;
-<<<<<<< HEAD
 		findingDropdownChangeHandler(false,200,50);
-=======
-		findingDropdownChangeHandler();
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 	}else{
 		findings[data.numUpdated].syncedWithServer=false;
 		console.log(data.message);
@@ -1423,11 +1254,7 @@ function callback_deleteFindingForm(data){
 			findings.splice(i,1);
 		}
 	}
-<<<<<<< HEAD
 	findingDropdownChangeHandler(false,200,50);
-=======
-	findingDropdownChangeHandler();
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 }
 function callback_addFindingForm(data){ 
  //newFind = new Finding();
@@ -1442,7 +1269,6 @@ function callback_addFindingForm(data){
   
   //console.log("selected finding = "+selectedFinding);
 
-<<<<<<< HEAD
   //findingDropdownChangeHandler(false,200,50);
 }
 
@@ -1455,17 +1281,6 @@ function callback_setMaxImgNum(data){
 	MaxImgNum = data.maxImageNum;
 	console.log("Max Image Num set to "+MaxImgNum);
 }
-=======
-  //findingDropdownChangeHandler();
-}
-
-function callback_updateFindingForm(data){
-  var dropdown = document.getElementById("findingsDrop");
-  console.log(data.message);
-  findingDropdownChangeHandler();
-}
-
->>>>>>> d8c8866efb424a7886463217e0cda3c9cf4aa6b6
 function my_js_callback2(data){
   check1.checked=!check1.checked;
   var s = "";
