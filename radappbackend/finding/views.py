@@ -16,7 +16,7 @@ def userhome(request):
     c = RequestContext(request,{'username':username})
     return HttpResponse(t.render(c))
 
-def mammointro(request):
+def mammointro(request,setNum):
     if request.user.is_authenticated():
         t = loader.get_template('mammointro.html')
     else:

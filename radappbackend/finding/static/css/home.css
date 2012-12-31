@@ -149,9 +149,16 @@ p{
    border-top-color: #1b435e;
    background: #1b435e;
    }
+#setSelectBox{
+	width:200px;
+	margin:5px 5px 5px 0px;
+	color: black;
+}
 
-
-
+#container{
+	width:700px;
+	margin-left:50px;
+}
 
 
 

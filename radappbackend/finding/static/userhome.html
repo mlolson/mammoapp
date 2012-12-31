@@ -10,12 +10,20 @@
 <!--{% dajaxice_js_import %}-->
 </head>
 <body>
-<h1>Breast Imaging Web Simulator (beta)</h1>
+<h1>Mammoapp home page for {{ username }}</h1>
 <br>
-<div id="homeButtons">
-<button type="button" id="b1" class='button' style="width:250px" onclick="window.location.href='/mammointro/'">Start Mammoapp Module</button><br>
+<div id='container'>
+Available Modules:
+<div id='setSelectBox' class='button' onclick="window.location.href='/mammointro/1'">
+<b><u>Test Set</u></b><br>
+<b>Description:</b> 5 mammograms from UW radiology website. For testing purposes only, findings not necessarily correct.<br>
+<b># of images:</b> 5<br>
+<b>Created by:</b> Matt Olson<br>
+</div>
+<hr>
 <button type="button" id="b2" class='button' style="width:250px"  onclick="window.location.href='/mammoupload/'">Upload Training Set</button>
 </div>
-<p><br><br>Logged in as {{ username }}  <a class='homelinks' href="/accounts/logout/">Log Out</a></p> 
+<p><br>Logged in as {{ username }}  <a class='homelinks' href="/accounts/logout/">Log Out</a></p> 
+
 </body>
 </html>
