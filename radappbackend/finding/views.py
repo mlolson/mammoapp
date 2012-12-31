@@ -16,6 +16,11 @@ def userhome(request):
     c = RequestContext(request,{'username':username})
     return HttpResponse(t.render(c))
 
+def about(request):
+    t = loader.get_template('about.html')
+    c = RequestContext(request,{})
+    return HttpResponse(t.render(c))   
+
 def mammointro(request,setNum):
     if request.user.is_authenticated():
         t = loader.get_template('mammointro.html')
@@ -44,7 +49,9 @@ def mammo(request):
     return HttpResponse(t.render(c))
 
 def answerform(request):
-    t = loader.get_template('answertemplate.html')
+    if request.user.username != 'matt':
+        return redirect('/')    
+    t = loader.get_template('answertemplate.html')    
     #finding_list = Finding.objects.order_by('findingNum')    
     c = RequestContext(request,{})
     return HttpResponse(t.render(c))

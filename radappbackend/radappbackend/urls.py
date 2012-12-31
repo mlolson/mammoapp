@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^mammo/$', 'finding.views.mammo'),
     url(r'^answers/$', 'finding.views.answerform'),
     url(r'^$', 'finding.views.home'),
+    url(r'^about', 'finding.views.about'),
     (r'^mammo/score/(\d{1})/(\d{1})/$', 'finding.views.score'),
     #url(r'^form/$', 'finding.views.form'),
     # Uncomment the admin/doc line below to enable admin documentation:
