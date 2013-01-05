@@ -744,9 +744,8 @@ function constructImpressionsForm(){
 		var impressionDiv = document.getElementById("impressionDiv");
 		impressionDiv.innerHTML="";
 		var newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDiv';
+		newDiv.className = 'answerTextDivL';
 		newDiv.innerHTML="User Impression <br>";
-		newDiv.style.float = 'left';
 		var newText = document.createElement('textarea');
 		newText.cols='35';
 		newText.rows='8';
@@ -755,9 +754,8 @@ function constructImpressionsForm(){
 		impressionDiv.appendChild(newDiv);
 		
 		var newDiv2 = document.createElement('div');
-		newDiv2.className = 'answerTextDiv';
+		newDiv2.className = 'answerTextDivR';
 		newDiv2.innerHTML="Answer Impression <br>";
-		newDiv2.style.float = 'right';
 		var newText2 = document.createElement('textarea');
 		newText2.cols='35';
 		newText2.rows='8';
@@ -768,9 +766,8 @@ function constructImpressionsForm(){
 		var indicationsDiv = document.getElementById("indicationsDiv");
 		indicationsDiv.innerHTML="";
 		var newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDiv';
+		newDiv.className = 'answerTextDivL';
 		newDiv.innerHTML="User Indications <br>";
-		newDiv.style.float = 'left';
 		var newText = document.createElement('textarea');
 		newText.cols='35';
 		newText.rows='1';
@@ -779,9 +776,8 @@ function constructImpressionsForm(){
 		indicationsDiv.appendChild(newDiv);	
 		
 		var newDiv2 = document.createElement('div');
-		newDiv2.className = 'answerTextDiv';
+		newDiv2.className = 'answerTextDivR';
 		newDiv2.innerHTML="Answer Indications <br>";
-		newDiv2.style.float = 'right';
 		var newText2 = document.createElement('textarea');
 		newText2.cols='35';
 		newText2.rows='1';
@@ -792,9 +788,8 @@ function constructImpressionsForm(){
 		var pathDiv = document.getElementById("finalPathologyDiv");
 		pathDiv.innerHTML = "";
 		var newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDiv';
+		newDiv.className = 'answerTextDivL';
 		newDiv.innerHTML="User Pathology <br>";
-		newDiv.style.float = 'left';
 		var newText = document.createElement('textarea');
 		newText.cols='35';
 		newText.rows='1';
@@ -803,9 +798,8 @@ function constructImpressionsForm(){
 		pathDiv.appendChild(newDiv);	
 		
 		var newDiv2 = document.createElement('div');
-		newDiv2.className = 'answerTextDiv';
+		newDiv2.className = 'answerTextDivR';
 		newDiv2.innerHTML="Answer Pathology <br>";
-		newDiv2.style.float = 'right';
 		var newText2 = document.createElement('textarea');
 		newText2.cols='35';
 		newText2.rows='1';
