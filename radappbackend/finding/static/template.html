@@ -12,6 +12,12 @@
 <!--{% dajaxice_js_import %}-->
 </head>
 <body>
+<div id='answerBoxDiv'>
+<div id='answerBoxInternal'>
+</div>
+<input type="button" class="formelement" value="Close" onclick=closeAnswerFindingBox()>
+</div>
+
 <form id="findingForm">
 <input type="button" class="formelement" name="Prev" value="Prev" onclick=gotoPrevFinding()>
 <b id='finding_indicator'>Finding: 0/0</b>

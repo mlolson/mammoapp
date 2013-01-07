@@ -549,7 +549,13 @@ function MouseDownHandler(e){
 		selectedFinding = ret;
 		findingDropdownChangeHandler(false,250,60);
 	}
-	
+	if(DisplayAnswers){
+		ret = isAnswerFindingClicked(e.layerX,e.layerY);
+		if(ret >=0){
+			console.log("Answer "+ret+" clicked");
+			displayAnswerFindingBox(ret,e.layerX,e.layerY);
+		}
+	}
     //isDragging = true;
     dragCoordStart = [e.screenX,e.screenY];
     drawScreen();
@@ -608,6 +614,43 @@ function isFindingClicked(x,y){
     	}
 	}	
 	return -1;
+}
+function isAnswerFindingClicked(x,y){
+	var i;
+	var xx = (x-windowX)/zoomFactor;
+	var yy = (y-windowY)/zoomFactor;
+	for(i=0;i<answerfindings.length;i++){
+		var isCC = answerfindings[i].isCC;
+		var isMLO = answerfindings[i].isMLO;
+		if((!viewCM && isCC) || (viewCM && isMLO)){
+			var xo;
+			var yo;
+			if(!viewCM){
+				xo = answerfindings[i].xCC;
+				yo = answerfindings[i].yCC;
+			}else{
+				xo = answerfindings[i].xMLO;
+                                yo = answerfindings[i].yMLO;
+			}
+			if(xx >xo && yy>yo && xx< xo+(20/zoomFactor) && yy< yo+(20/zoomFactor)){
+				return i;
+			}
+		}	
+
+	}
+	return -1;
+}
+function displayAnswerFindingBox(ind,xx,yy){
+	var ansDiv = document.getElementById('answerBoxDiv');
+	var ansInt = document.getElementById('answerBoxInternal');
+	ansInt.innerHTML = '<p>Type: '+answerfindings[ind].type + '</p>'+
+			'<p>Description: '+answerfindings[ind].description+'</p>';
+	ansDiv.style.visibility = 'visible';
+	ansDiv.style.left = xx +"px";
+	ansDiv.style.top = yy +"px";
+}
+function closeAnswerFindingBox(){
+	document.getElementById('answerBoxDiv').style.visibility = 'hidden';
 }
 //returns true if mouse is in orientation box, otherwise false.
 function isInOrientationBox(x,y){	
