@@ -7,7 +7,8 @@
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css">
 <script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
 <script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/button_functions.js"></script>
+<script type="text/javascript"
+	src="{{STATIC_URL}}js/button_functions.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/ajax_callbacks.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/data_classes.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/mammoapp.js"></script>
@@ -15,64 +16,85 @@
 <!--{% dajaxice_js_import %}-->
 </head>
 <body>
-<div id='answerBoxDiv'>
-<form id="answerBoxForm">
-<input type="checkbox" id="check1" name="mass" value="mass">Mass
-<input type="checkbox" id="check2" name="calcifications" value="calcs" >Calcifications
-<input type="checkbox" id="check3" name="other" value="other" >Other Suspicious Abnormality<br>
-Description: <br>
-<textarea name="description" id="description_box" cols="30" rows="5"></textarea>
-</form>
-<div id='answerBoxInternal'></div>
-<input type="button" class="formelement" value="Close" onclick=but_closeAnswerFindingBox()>
-<input type="button" id="submitAnswerFindingButton" class="formelement" value="Submit" onclick=but_submitAnswerFindingBox()>
-</div>
-<form id="impressionsForm">
-Impressions Form
-<hr>
-<div id="findingsHeader"></div>
-<div id="findingsList"></div>
-<div id="biradsDiv">
-Choose BIRADS Category
-<input type="radio" class="formelement" name="radio1" value=0> 0
-<input type="radio" class="formelement" name="radio1" value=1> 1
-<input type="radio" class="formelement" name="radio1" value=2> 2
-<input type="radio" class="formelement" name="radio1" value=3> 3
-<input type="radio" class="formelement" name="radio1" value=4> 4
-<input type="radio" class="formelement" name="radio1" value=5> 5
-<input type="radio" class="formelement" name="radio1" value=6> 6
-</div>
-<div id="impressionDiv">
-Impression <br>
-<textarea name="impression" id="impressions_box" cols="60" rows="5"></textarea><br>
-</div>
-<div id="indicationsDiv">
-Indications<br>
-<textarea name="indications" id="indications_box" cols="60" rows="1"></textarea><br>
-</div>
-<div id="finalPathologyDiv">
-Guess Final Pathology<br>
-<textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea><br>
-</div>
-<div id="formFooter">
-<input type="button" class="formelement" name="submit_Impression" id="saveAndSubmitImpressionButton" value="Save & Submit" onclick=but_checkFindingAnswers()>
-<input type="button" class="formelement" name="close_Impression" id="closeImpressionButton" value="Close" onclick=but_closeImpressionForm()>
-<input type="button" class="formelement" name="next_case" id="nextCaseButton" value="Next Case" disabled=true onclick=but_nextImage()>
-</div>
-</form>
-<!--<button type="button" class='button' id="drawRectRoiButton" onclick=DefineROIbuttonHandler_rectangle()>Rect ROI</button>-->
-<button type="button" class='button' id="drawPolyRoiButton" onclick=but_DefineROIbuttonHandler_polygon()>Draw Poly ROI</button>
-<button type="button" class='button' id="spotMagButton" onclick=but_SpotMagTool()>Spot Mag</button>
-<button type="button" class='button' id="impressionButton" onclick=but_constructImpressionsForm()>Show Impression</button>
-<button type="button" class='button' id='zoomOutButton' onclick=but_zoomOut()>-</button>
-<button type="button" class='button' id='zoomInButton' onclick=but_zoomIn()>+</button>
-<div style="position:relative; top: 0px; left: 0px;">
-<canvas id="canvas_bottom" width="800" height="800" style="position:absolute;">
- Your browser does not support HTML5 Canvas. <a href="http://google.com/chrome">Consider upgrading to Google Chrome.</a>
+	<div id='answerBoxDiv'>
+		<form id="answerBoxForm">
+			<input type="checkbox" id="check1" name="mass" value="mass">Mass
+			<input type="checkbox" id="check2" name="calcifications"
+				value="calcs">Calcifications <input type="checkbox"
+				id="check3" name="other" value="other">Other Suspicious
+			Abnormality<br> Description: <br>
+			<textarea name="description" id="description_box" cols="30" rows="5"></textarea>
+		</form>
+		<div id='answerBoxInternal'></div>
+		<input type="button" class="formelement" value="Close"
+			onclick=but_closeAnswerFindingBox()> <input type="button"
+			id="submitAnswerFindingButton" class="formelement" value="Submit"
+			onclick=but_submitAnswerFindingBox()>
+	</div>
+	<form id="impressionsForm">
+		Impressions Form
+		<hr>
+		<div id="findingsHeader"></div>
+		<div id="findingsList"></div>
+		<div id="biradsDiv">
+			Choose BIRADS Category <input type="radio" class="formelement"
+				name="radio1" value=0> 0 <input type="radio"
+				class="formelement" name="radio1" value=1> 1 <input
+				type="radio" class="formelement" name="radio1" value=2> 2 <input
+				type="radio" class="formelement" name="radio1" value=3> 3 <input
+				type="radio" class="formelement" name="radio1" value=4> 4 <input
+				type="radio" class="formelement" name="radio1" value=5> 5 <input
+				type="radio" class="formelement" name="radio1" value=6> 6
+		</div>
+		<div id="impressionDiv">
+			Impression <br>
+			<textarea name="impression" id="impressions_box" cols="60" rows="5"></textarea>
+			<br>
+		</div>
+		<div id="indicationsDiv">
+			Indications<br>
+			<textarea name="indications" id="indications_box" cols="60" rows="1"></textarea>
+			<br>
+		</div>
+		<div id="finalPathologyDiv">
+			Guess Final Pathology<br>
+			<textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea>
+			<br>
+		</div>
+		<div id="formFooter">
+			<input type="button" class="formelement" name="submit_Impression"
+				id="saveAndSubmitImpressionButton" value="Save & Submit"
+				onclick=but_checkFindingAnswers()> <input type="button"
+				class="formelement" name="close_Impression"
+				id="closeImpressionButton" value="Close"
+				onclick=but_closeImpressionForm()> <input type="button"
+				class="formelement" name="next_case" id="nextCaseButton"
+				value="Next Case" disabled=true onclick=but_nextImage()>
+		</div>
+	</form>
+	<!--<button type="button" class='button' id="drawRectRoiButton" onclick=DefineROIbuttonHandler_rectangle()>Rect ROI</button>-->
+	<button type="button" class='button' id="drawPolyRoiButton"
+		onclick=but_DefineROIbuttonHandler_polygon()>Draw Poly ROI</button>
+	<button type="button" class='button' id="spotMagButton"
+		onclick=but_SpotMagTool()>Spot Mag</button>
+	<button type="button" class='button' id="impressionButton"
+		onclick=but_constructImpressionsForm()>Show Impression</button>
+	<button type="button" class='button' id='zoomOutButton'
+		onclick=but_zoomOut()>-</button>
+	<button type="button" class='button' id='zoomInButton'
+		onclick=but_zoomIn()>+</button>
+	<div style="position: relative; top: 0px; left: 0px;">
+		<canvas id="canvas_bottom" width="800" height="800"
+			style="position: absolute;">
+ Your browser does not support HTML5 Canvas. <a
+				href="http://google.com/chrome">Consider upgrading to Google Chrome.</a>
 </canvas>
-<canvas id="canvas_top" width="800" height="800" style="position:absolute; border: black 1px solid"></canvas>
-<canvas id="canvas_obox1" width="0" height="0" style="border: black 1px solid"></canvas>
-<canvas id="canvas_obox2" width="0" height="0" style="border: black 1px solid"></canvas>
-</div>
+		<canvas id="canvas_top" width="800" height="800"
+			style="position: absolute; border: black 1px solid"></canvas>
+		<canvas id="canvas_obox1" width="0" height="0"
+			style="border: black 1px solid"></canvas>
+		<canvas id="canvas_obox2" width="0" height="0"
+			style="border: black 1px solid"></canvas>
+	</div>
 </body>
 </html>
