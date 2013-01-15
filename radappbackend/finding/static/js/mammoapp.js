@@ -791,9 +791,11 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 
 		// Append User and answer types.
 		var newDiv = document.createElement('div');
-		newDiv.style.float = 'left';
-		newDiv.style.width = '200px';
+		newDiv.className = "answerFTextDivL";
+		//newDiv.style.width = '200px';
 		newDiv.style.height = '50px';
+		//newDiv.style.float = 'left';
+		
 		var str = "";
 		if (af.userType == "calc") {
 			str = "Calcifications";
@@ -808,9 +810,11 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 		ansInt.appendChild(newDiv);
 
 		newDiv = document.createElement('div');
-		newDiv.style.float = 'right';
-		newDiv.style.width = '200px';
+		newDiv.className = "answerFTextDivR";
+		//newDiv.style.width = '200px';
 		newDiv.style.height = '50px';
+		//newDiv.style.float = 'right';
+		
 		str = "";
 		if (af.type == "calc") {
 			str = "Calcifications";
@@ -825,9 +829,10 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 		ansInt.appendChild(newDiv);
 		// Append User and answer descriptions
 		newDiv = document.createElement('div');
-		newDiv.style.float = 'left';
-		newDiv.style.width = '200px';
-		newDiv.style.height = 'automatic';
+		newDiv.className = "answerFTextDivL";
+		//newDiv.style.width = '200px';
+		//newDiv.style.float = 'left';
+		//newDiv.style.height = 'automatic';
 		newDiv.innerHTML = "<u>Your description</u>:<br>";
 		var newText = document.createElement('textarea');
 		newText.cols = 21;
@@ -838,15 +843,16 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 		ansInt.appendChild(newDiv);
 
 		newDiv = document.createElement('div');
-		newDiv.style.float = 'right';
-		newDiv.style.width = '200px';
-		newDiv.style.height = 'automatic';
+		newDiv.className = "answerFTextDivR";
+		//newDiv.style.width = '200px';
+		//newDiv.style.float = 'right';
+		//newDiv.style.height = 'automatic';
 		newDiv.innerHTML = "<u>Answer description</u>:<br>";
 		newText = document.createElement('textarea');
 		newText.cols = 21;
 		newText.rows = 5;
 		newText.value = af.description;
-		// newText.style.float = 'right';
+		//newText.style.float = 'right';
 		newDiv.appendChild(newText);
 		ansInt.appendChild(newDiv);
 
@@ -962,7 +968,7 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 	var newDiv = document.createElement('div');
 	newDiv.style.width = '630px';
 	newDiv.style.height = '30px';
-	newDiv.innerHTML = '<hr>';
+	//newDiv.innerHTML = '<hr>';
 	fdiv.appendChild(newDiv);
 	// display any answerfindings that weren't "found"
 	// REALLY could use JQuery here instead of this long winded JS
