@@ -36,7 +36,7 @@ function callback_checkFindingAnswers(data) {
 	APP.Answer_Impression.biradsNum = returnedAI[0].biradsNum;
 	APP.Answer_Impression.indications = returnedAI[0].indications;
 	APP.Answer_Impression.syncedWithServer = true;
-	// drawScreen();
+	APP.drawScreen();
 	// constructImpressionsForm();
 }
 function callback_setMaxImgNum(data) {

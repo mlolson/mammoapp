@@ -290,7 +290,9 @@ Mammoapp.prototype.MouseDownHandler = function(e) {
 	ret = APP.isAnswerFindingClicked(e.layerX, e.layerY);
 	if (ret >= 0) {
 		APP.selectedAnswerFinding = ret;
-		APP.displayAnswerFindingBox(ret, true);
+		if(APP.answerfindings[ret].corFinding >-1){
+			APP.displayAnswerFindingBox(ret, true);
+		}
 	}
 	WS.isDragging = true;
 	WS.dragCoordStart = [ e.screenX, e.screenY ];
@@ -707,8 +709,7 @@ Mammoapp.prototype.drawAnswerFindingMark = function(n) {
 		return;
 	}
 	var stk, lw, fs;
-	if (APP
-			.isAnswerFindingClicked(WS.currentMousePos[0],
+	if (APP.isAnswerFindingClicked(WS.currentMousePos[0],
 					WS.currentMousePos[1]) == af.findingNum) {
 		lw = 5;
 		stk = "#FFFF33"; // Lighter Orange-yellow
