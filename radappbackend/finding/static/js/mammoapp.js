@@ -790,14 +790,12 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 		var html = "Correct answer: ";
 		
 		//ugly way of listing all the correct answers but it does the job.
-		for(var i=0;i<choices.length-1;i++){
+		for(var i=0;i<choices.length;i++){
 			if(choices[i][1]){
-				html += choices[i][0] + ", ";
+				html += choices[i][0] + "<br>";
 			}
 		}
-		if(choices[choices.length-1][1]){
-			html += choices[choices.length-1][0] + "<br>";
-		}
+		
 		ansInt.innerHTML = html;
 		
 		for(var i=0;i<choices.length;i++){
