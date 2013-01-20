@@ -173,12 +173,20 @@ def returnAllAnswerFindings(request,setNum,imageNum):
                     "finalPathology":ai.finalPathology,
                     "indications":ai.indications
                                }]}
+    choice_list = ai.choices.all()
+    
+    
     
     for af in af_list:
+        choice_list = af.choices.all()
+        cdat = []
+        for i in range(len(choice_list)):
+            cdat.append([choice_list[i].option,choice_list[i].isCorrect])
+            
         data['AnswerFindings'].append({"findingNum":af.findingNum,"isCCView":af.isCCView,"isMLOView":af.isMLOView,
                      "xLocCC":af.xLocCC,"yLocCC":af.yLocCC,"xLocMLO":af.xLocMLO,"yLocMLO":af.yLocMLO,
-                     "type":af.type,"description":af.description})
-    #data["AnswerImpression"].append({"biradsNum":ai.biradsNum,"description":ai.description,"finalPathology":ai.finalPathology})
+                     "type":af.type,"description":af.description,"choices":cdat})
+        
     return simplejson.dumps(data)
         
     

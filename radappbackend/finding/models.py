@@ -55,6 +55,14 @@ class AnswerFinding(models.Model):
     description = models.CharField(max_length=1000) 
     def __unicode__(self):
         return unicode(self.id)
+
+class AnswerFindingChoice(models.Model):
+    #image = models.ForeignKey(Image)
+    afind = models.ForeignKey(AnswerFinding,related_name='choices')
+    option = models.CharField(max_length=100)
+    isCorrect =  models.BooleanField()
+    def __unicode__(self):
+        return unicode(self.id)
     
 class AnswerImpression(models.Model):
     #setNum = models.IntegerField()
@@ -66,3 +74,12 @@ class AnswerImpression(models.Model):
     finalPathology = models.CharField(max_length=100)      
     def __unicode__(self):
         return unicode(self.id)
+    
+class AnswerImpressionChoice(models.Model):
+    #image = models.ForeignKey(Image)
+    aimp = models.ForeignKey(AnswerImpression,related_name='choices')
+    option = models.CharField(max_length=100)
+    isCorrect =  models.BooleanField()
+    def __unicode__(self):
+        return unicode(self.id)
+    

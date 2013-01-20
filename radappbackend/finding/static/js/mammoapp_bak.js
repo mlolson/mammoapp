@@ -18,11 +18,14 @@ function eventWindowLoaded() {
 }
 function Mammoapp() {
 	// DOM handles
+	this.description_box;
+	this.check1;
+	this.check2;
+	this.check3;
 	this.context_top;
 	this.context_bottom;
 	this.context_obox1;
 	this.context_obox2;
-	this.answerCheckboxes;
 
 	// Images and meta information
 	this.imgC;
@@ -42,7 +45,6 @@ function Mammoapp() {
 	this.selectedAnswerFinding;
 	this.numFoundAnswerFindings;
 	this.caseSubmitted;
-	this.maxRoiArea
 
 	this.eventMImgLoaded = eventMImgLoaded;
 	this.eventCImgLoaded = eventCImgLoaded;
@@ -145,13 +147,12 @@ function Mammoapp() {
 					this.MouseLeaveHandler, false);
 		}
 
-		WS.zoomFactor = WS.canvasWidth /cWidth;
-		WS.minZoom = WS.canvasWidth/cWidth;
+		WS.zoomFactor = WS.canvasWidth / WS.windowWidth;
+		// minZoom = canvasWidth/windowWidth;
 		WS.windowX = 0;
 		WS.windowY = 0;
 		WS.DisplayAnswers = false;
 		WS.viewCM = false;
-		APP.maxRoiArea = 150000;
 
 		APP.context_obox1.lineWidth = 2;
 		APP.context_obox2.lineWidth = 2;
@@ -263,7 +264,7 @@ Mammoapp.prototype.MouseDownHandler = function(e) {
 			APP.findings[APP.selectedFinding].addPoint(e.layerX, e.layerY);
 		} else {
 			WS.isROIdrawing = false;
-			WS.isPolyRoiDrawing = false;			
+			WS.isPolyRoiDrawing = false;
 		}
 		APP.drawScreen();
 		return;
@@ -434,11 +435,11 @@ Mammoapp.prototype.drawScreen = function() {
 		APP.findings[APP.selectedFinding].wasJustCompleted = false;
 		WS.isPolyRoiDrawing = false;
 		WS.isROIdrawing = false;
-		if(APP.findings[APP.selectedFinding].roiArea()>APP.maxRoiArea){
-			APP.deleteFinding(APP.selectedFinding);
-			alert("ROI too large");
-		}
 		APP.drawScreen_top_only();
+
+		if (APP.findings[APP.selectedFinding].corAnswerNums.length > 0) {
+			// APP.displayAnswerFindingBox(APP.selectedFinding,);
+		}
 	} else {// else draw image normally
 		APP.context_bottom.clearRect(0, 0, WS.canvasWidth, WS.canvasHeight);
 
@@ -780,73 +781,93 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 	APP.closeAnswerFindingBox();
 	var ansDiv = document.getElementById('answerBoxDiv');
 	var ansInt = document.getElementById('answerBoxInternal');
-	//var ansForm = document.getElementById('answerBoxForm');
+	var ansForm = document.getElementById('answerBoxForm');
 	// var c1 = document.getElementById('check1');
 	var af = APP.answerfindings[ind];
-	var choices = af.choices;
-	var userChoices =  af.userChoices;
 	if (af.wasSubmitted) {
+		// ansInt.innerHTML = '<p>Type: '+APP.answerfindings[ind].type + '</p>'+
+		// '<p>Description: '+APP.answerfindings[ind].description+'</p>';
 		document.getElementById("submitAnswerFindingButton").disabled = true;
-		var html = "Correct answer: ";
+		ansInt.innerHTML = "";
+
+		// Append User and answer types.
+		var newDiv = document.createElement('div');
+		newDiv.className = "answerFTextDivL";
+		//newDiv.style.width = '200px';
+		newDiv.style.height = '50px';
+		//newDiv.style.float = 'left';
 		
-		//ugly way of listing all the correct answers but it does the job.
-		for(var i=0;i<choices.length-1;i++){
-			if(choices[i][1]){
-				html += choices[i][0] + ", ";
-			}
+		var str = "";
+		if (af.userType == "calc") {
+			str = "Calcifications";
+		} else if (af.userType == "mass") {
+			str = "Mass";
+		} else if (af.userType == "other") {
+			str = "Other Suspicious Abnormality";
+		} else {
+			str = "Undefined";
 		}
-		if(choices[choices.length-1][1]){
-			html += choices[choices.length-1][0] + "<br>";
-		}
-		ansInt.innerHTML = html;
+		newDiv.innerHTML = "<u>You chose type</u>:<br>" + str
+		ansInt.appendChild(newDiv);
+
+		newDiv = document.createElement('div');
+		newDiv.className = "answerFTextDivR";
+		//newDiv.style.width = '200px';
+		newDiv.style.height = '50px';
+		//newDiv.style.float = 'right';
 		
-		for(var i=0;i<choices.length;i++){
-			
-			html += choices[i][0] +", "
-			var span =  document.createElement('span');
-			//span.style.color = 'white';
-			if(userChoices[i]){
-				APP.answerCheckboxes[i].checked = true;
-				if(choices[i][1]){
-					span.style.color = '#66FF66';  //L green	
-				}else{
-					span.style.color = '#FF3333'; //L red
-				}
-			}else{
-				APP.answerCheckboxes[i].checked = false;
-			}
-			if(choices[i][1]){
-				span.style.textDecoration = 'underline';
-			}
-			
-			ansInt.appendChild(APP.answerCheckboxes[i]);
-			span.appendChild(document.createTextNode(choices[i][0]));
-			ansInt.appendChild(span);
-			ansInt.appendChild(document.createElement('br'));
+		str = "";
+		if (af.type == "calc") {
+			str = "Calcifications";
+		} else if (af.type == "mass") {
+			str = "Mass";
+		} else if (af.type == "other") {
+			str = "Other Suspicious Abnormality";
+		} else {
+			str = "Undefined";
 		}
-		//Append box with description
+		newDiv.innerHTML = "<u>Answer type</u>:<br>" + str
+		ansInt.appendChild(newDiv);
+		// Append User and answer descriptions
 		newDiv = document.createElement('div');
 		newDiv.className = "answerFTextDivL";
-		newDiv.innerHTML = "<br><u>Description</u>:<br>"+ af.description;
+		//newDiv.style.width = '200px';
+		//newDiv.style.float = 'left';
+		//newDiv.style.height = 'automatic';
+		newDiv.innerHTML = "<u>Your description</u>:<br>";
+		var newText = document.createElement('textarea');
+		newText.cols = 21;
+		newText.rows = 5;
+		newText.value = af.userDescription;
+		// newText.style.float = 'left';
+		newDiv.appendChild(newText);
 		ansInt.appendChild(newDiv);
-		
+
+		newDiv = document.createElement('div');
+		newDiv.className = "answerFTextDivR";
+		//newDiv.style.width = '200px';
+		//newDiv.style.float = 'right';
+		//newDiv.style.height = 'automatic';
+		newDiv.innerHTML = "<u>Answer description</u>:<br>";
+		newText = document.createElement('textarea');
+		newText.cols = 21;
+		newText.rows = 5;
+		newText.value = af.description;
+		//newText.style.float = 'right';
+		newDiv.appendChild(newText);
+		ansInt.appendChild(newDiv);
+
 		ansInt.style.visibility = 'visible';
-		//ansForm.style.visibility = 'hidden';
-		//ansForm.style.height = '0px';
-		//ansForm.style.width = '0px';
+		ansForm.style.visibility = 'hidden';
+		ansForm.style.height = '0px';
+		ansForm.style.width = '0px';
 	} else {
 		document.getElementById("submitAnswerFindingButton").disabled = false;
 		ansInt.innerHTML = "";
-		
-		var html = "What is this?<br>";
-		for(var i=0;i<choices.length;i++){
-			html += "<input type='checkbox' name='choices_cb' id='choices_cb"+i+"'>"+choices[i][0]+"<br>";
-		}
-		ansInt.innerHTML = html;
-		ansInt.style.visibility = "visible";
-		//ansForm.style.visibility = "visible";
-		//ansForm.style.height = "automatic";
-		//ansForm.style.width = '350px';
+		ansInt.style.visibility = "hidden";
+		ansForm.style.visibility = "visible";
+		ansForm.style.height = "automatic";
+		ansForm.style.width = '350px';
 	}
 	ansDiv.style.visibility = "visible";
 	if (updateLoc) {
@@ -857,7 +878,7 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 Mammoapp.prototype.closeAnswerFindingBox = function() {
 	document.getElementById('answerBoxDiv').style.visibility = "hidden";
 	document.getElementById('answerBoxInternal').style.visibility = 'hidden';
-	//document.getElementById('answerBoxForm').style.visibility = "hidden";
+	document.getElementById('answerBoxForm').style.visibility = "hidden";
 }
 
 Mammoapp.prototype.constructImpressionsForm = function() {
@@ -892,32 +913,55 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 			// Append User and answer types.
 			newDiv = document.createElement('div');
 			newDiv.className = 'answerTextDivL';
-			
-			var str = "<u>Answer</u>: ";
-			for(var i =0;i<af.choices.length; i++){
-				if(af.choices[i][1]){
-					str += af.choices[i][0] +"<br>";
-				}
-			}			
-			str += "<u>You chose</u>: ";
-			for(var i =0;i<af.userChoices.length;i++){
-				if(af.userChoices[i]){
-					str += af.choices[i][0];
-					if(af.choices[i][1]){
-						str+=" (correct +1)<br>";
-					}else{
-						str+=" (incorrect +0)<br>";
-					}
-					
-				}
+			// newDiv.style.float = 'left';
+			// newDiv.style.width = '300px';
+			// newDiv.style.height = '30px';
+			var str = "";
+			if (af.userType == "calc") {
+				str = "Calcifications";
+			} else if (af.userType == "mass") {
+				str = "Mass";
+			} else if (af.userType == "other") {
+				str = "Other Suspicious Abnormality";
+			} else {
+				str = "Undefined";
 			}
-			
-			
-			newDiv.innerHTML =  str;
-			fdiv.appendChild(newDiv);		
+			newDiv.innerHTML = "<u>You chose type</u>: <b>" + str + "</b><br>";
+			fdiv.appendChild(newDiv);
+
 			newDiv = document.createElement('div');
 			newDiv.className = 'answerTextDivR';
-			newDiv.innerHTML = "<u>Description</u>:<br>"
+			// newDiv.style.float = 'right';
+			// newDiv.style.width = '300px';
+			// newDiv.style.height = '30px';
+			str = "";
+			if (af.type == "calc") {
+				str = "Calcifications";
+			} else if (af.type == "mass") {
+				str = "Mass";
+			} else if (af.type == "other") {
+				str = "Other Suspicious Abnormality";
+			} else {
+				str = "Undefined";
+			}
+			newDiv.innerHTML = "<u>Answer type</u>: <b>" + str + "</b><br>";
+			fdiv.appendChild(newDiv);
+			// Append User and answer descriptions
+			newDiv = document.createElement('div');
+			newDiv.className = 'answerTextDivL';
+			// newDiv.style.float = 'left';
+			// newDiv.style.width = '300px';
+			// newDiv.style.height = 'automatic';
+			newDiv.innerHTML = "<u>Your description</u>:<br>"
+					+ af.userDescription;
+			fdiv.appendChild(newDiv);
+
+			newDiv = document.createElement('div');
+			newDiv.className = 'answerTextDivR';
+			// newDiv.style.float = 'right';
+			// newDiv.style.width = '300px';
+			// newDiv.style.height = 'automatic';
+			newDiv.innerHTML = "<u>Answer description</u>:<br>"
 					+ af.description;
 			fdiv.appendChild(newDiv);
 		}
@@ -1055,8 +1099,8 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 
 }
 Mammoapp.prototype.saveFinding = function() {
-	APP.findings[APP.selectedFinding].description = ""; 
-		//document.getElementById("description_box").value;
+	APP.findings[APP.selectedFinding].description = document
+			.getElementById("description_box").value;
 	var mass = APP.check1.checked;
 	var calc = APP.check2.checked;
 	var other = APP.check3.checked;

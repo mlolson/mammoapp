@@ -13,12 +13,30 @@ function callback_checkFindingAnswers(data) {
 	var returnedAI = data.AnswerImpression;
 	APP.answerfindings.length = 0;
 	for ( var i = 0; i < returnedAFs.length; i++) {
-		var newAF = new AnswerFinding(APP.imageNum, APP.setNum,
-				returnedAFs[i].findingNum, returnedAFs[i].isCCView,
-				returnedAFs[i].isMLOView, returnedAFs[i].xLocCC,
-				returnedAFs[i].yLocCC, returnedAFs[i].xLocMLO,
-				returnedAFs[i].yLocMLO, returnedAFs[i].type,
-				returnedAFs[i].description, -1, "", "", false);
+		var newAF = new AnswerFinding(APP.imageNum, APP.setNum);
+		
+		newAF.findingNum = returnedAFs[i].findingNum; 
+		newAF.isCC = returnedAFs[i].isCCView;
+		newAF.isMLO = returnedAFs[i].isMLOView;
+		newAF.xCC = returnedAFs[i].xLocCC;
+		newAF.yCC = returnedAFs[i].yLocCC; 
+		newAF.xMLO = returnedAFs[i].xLocMLO;
+		newAF.yMLO = returnedAFs[i].yLocMLO;
+		newAF.type = returnedAFs[i].type;
+		newAF.description = returnedAFs[i].description; 
+		newAF.corFinding = -1; 
+		newAF.userType = "";
+		newAF.userDescription = "";
+		newAF.wasSubmitted = false;
+		var choices = returnedAFs[i].choices;
+		var ch_clean = new Array();
+		//var an_clean = new Array();
+		for(var j=0; j<choices.length;j++){
+			ch_clean.push(choices[j]);
+			//an_clean.push(choices[j+1]);
+		}
+		newAF.choices = ch_clean;
+		//newAF.choicesAnswers = an_clean;
 		APP.answerfindings.push(newAF);
 	}
 	// Now we will want to do this check at the time the finding is created.

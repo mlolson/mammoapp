@@ -72,6 +72,7 @@ function Finding() {
 	this.getYarr = getYarr;
 	this.getNpoints = getNpoints;
 	this.addRect = addRect;
+	this.roiArea = roiArea;
 
 	function init(fNum) {
 		this.n = 0;
@@ -93,10 +94,12 @@ function Finding() {
 		if (this.n > 2) {
 			if ((Math.abs(this.xArr[0] - this.xArr[this.n]) + Math
 					.abs(this.yArr[0] - this.yArr[this.n])) < 20 / WS.zoomFactor) {
+				
 				this.xArr[this.n] = this.xArr[0];
 				this.yArr[this.n] = this.yArr[0];
 				this.isClosed = true;
 				this.wasJustCompleted = true;
+				
 				//Check to see if ROI contains an answer finding.
 				for ( var j = 0; j < APP.answerfindings.length; j++) {
 					var afind = APP.answerfindings[j];
@@ -162,26 +165,40 @@ function Finding() {
 		}
 		return c;
 	}
+	//Returns area of polygon defined by vertices xArr, yArr. 
+	//Ignores last vertex, because in this program it is the same as the first.
+	function roiArea(){
+		var area =0;
+		var i;
+		var npoints = this.n -1;
+		var j=npoints-1;
+		for (i=0; i<npoints; i++) { 
+			area+=Math.abs((this.xArr[j]+this.xArr[i])*(this.yArr[j]-this.yArr[i])); 
+			j=i; 
+		}
+		return 0.5*area; 	
+	}
 }
-function AnswerFinding(imgN, setN, findingNum, isCC, isMLO, xCC, yCC, xMLO,
-		yMLO, type, description, corFinding, userType, userDescription,
-		wasSubmitted) {
-	this.xCC = xCC;
-	this.yCC = yCC;
-	this.xMLO = xMLO;
-	this.yMLO = yMLO;
-	this.isCC = isCC;
-	this.isMLO = isMLO;
-	this.type = type;
-	this.description = description;
+function AnswerFinding(imgN, setN){
 	this.imgN = imgN;
 	this.setN = setN;
-	this.findingNum = findingNum;
-	this.corFinding = corFinding;
+	this.xCC;
+	this.yCC;
+	this.xMLO;
+	this.yMLO ;
+	this.isCC;
+	this.isMLO;
+	this.type;
+	this.description;
+	this.findingNum;
+	this.corFinding;
 	//User inputed information
-	this.userType = userType;
-	this.userDescription = userDescription;
-	this.wasSubmitted = wasSubmitted;
+	this.userType;
+	this.userDescription;
+	this.wasSubmitted;
+	//List of choices that the finding might be
+	this.choices;//2D array of choices and and T/F answers
+	this.userChoices;//list of indices of choices selected by user.
 }
 
 function AnswerImpression(syncedWithServer, description, finalPathology,
@@ -191,6 +208,8 @@ function AnswerImpression(syncedWithServer, description, finalPathology,
 	this.finalPathology = finalPathology;
 	this.biradsNum = biradsNum;
 	this.indications = indications;
+	this.choices;//2D array of choices and and T/F answers
+	this.userChoices;//list of indices of choices selected by user.
 	this.init = init;
 
 	function init() {

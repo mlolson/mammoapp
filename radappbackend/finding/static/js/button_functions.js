@@ -17,8 +17,20 @@ function but_submitAnswerFindingBox() {
 	}
 	APP.answerfindings[ind].wasSubmitted = true;
 	APP.numFoundAnswerFindings++;
-
-	APP.answerfindings[ind].userDescription = APP.description_box.value;
+	var selected = new Array();
+	var checkboxArr = new Array();
+	for(var i=0;i<APP.answerfindings[ind].choices.length;i++){
+		var cb = document.getElementById("choices_cb"+i)
+		checkboxArr.push(cb);
+		if(cb.checked){
+			selected.push(true);
+		}else{
+			selected.push(false);
+		}
+	}
+	APP.answerCheckboxes = checkboxArr;
+	APP.answerfindings[ind].userChoices = selected;
+	/*APP.answerfindings[ind].userDescription = APP.description_box.value;
 	if (APP.check1.checked) {
 		APP.answerfindings[ind].userType = "mass";
 	} else if (APP.check2.checked) {
@@ -26,6 +38,7 @@ function but_submitAnswerFindingBox() {
 	} else if (APP.check3.checked) {
 		APP.answerfindings[ind].userType = "other";
 	}
+	*/
 	APP.drawScreen_top_only();
 	APP.displayAnswerFindingBox(ind, false);
 }
@@ -130,6 +143,13 @@ function but_nextImage() {
 			+ (APP.imageNum) + "m.jpg";
 }
 function but_DefineROIbuttonHandler_polygon() {
+	if(WS.isPolyRoiDrawing){//If button was already clicked, go through and delete any unclosed findings.
+		for(var i=0;i<APP.findings.length;i++){
+			if(!APP.findings[i].isClosed){
+				APP.deleteFinding(i);
+			}
+		}
+	}
 	APP.addFinding();
 	if (APP.findings.length > 0) {
 		// isROIdrawing = true;
