@@ -62,12 +62,6 @@ function Mammoapp() {
 		var theCanvas_obox1 = document.getElementById("canvas_obox1");
 		var theCanvas_obox2 = document.getElementById("canvas_obox2");
 
-		// Probably will want to get rid of these eventually.
-		this.description_box = document.getElementById("description_box");
-		this.check1 = document.getElementById("check1");
-		this.check2 = document.getElementById("check2");
-		this.check3 = document.getElementById("check3");
-
 		this.findings = new Array();
 		this.answerfindings = new Array();
 		this.Answer_Impression = new AnswerImpression(false, "", "", "", -1);
@@ -427,8 +421,7 @@ Mammoapp.prototype.drawScreen = function() {
 	if (WS.isRectRoiDrawing) { // Only draw top screen if we are in draw ROI
 								// mode
 		APP.drawScreen_top_only();
-	} else if (APP.findings.length > 0
-			&& APP.findings[APP.selectedFinding].wasJustCompleted) {
+	} else if (APP.findings.length > 0 && APP.findings[APP.selectedFinding].wasJustCompleted) {
 		// Work around for bug where ctx stalls while drawing img and shapes...
 		// I don't fully understand why.
 		APP.findings[APP.selectedFinding].wasJustCompleted = false;
@@ -438,7 +431,7 @@ Mammoapp.prototype.drawScreen = function() {
 			APP.deleteFinding(APP.selectedFinding);
 			alert("ROI too large");
 		}
-		APP.drawScreen_top_only();
+		APP.drawScreen_top_only()
 	} else {// else draw image normally
 		APP.context_bottom.clearRect(0, 0, WS.canvasWidth, WS.canvasHeight);
 
@@ -836,7 +829,7 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 		document.getElementById("submitAnswerFindingButton").disabled = false;
 		ansInt.innerHTML = "";
 		
-		var html = "What is this?<br>";
+		var html = af.question+"<br>";
 		for(var i=0;i<choices.length;i++){
 			html += "<input type='checkbox' name='choices_cb' id='choices_cb"+i+"'>"+choices[i][0]+"<br>";
 		}
@@ -1047,6 +1040,7 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 		document.getElementById("finalPathologyDiv").innerHTML = 'Guess Final Pathology<br><textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea><br>';
 		document.getElementById("nextCaseButton").disabled = true;
 		document.getElementById("saveAndSubmitImpressionButton").disabled = false;
+		
 	}
 
 	document.getElementById("impressionsForm").style.visibility = 'visible';
@@ -1072,6 +1066,12 @@ Mammoapp.prototype.deleteFinding = function(ind) {
 		return;
 	}
 	APP.findings.splice(ind,1);
+	APP.selectedFinding--;
+	if(APP.selectedFinding < 0){
+		APP.selectedFinding =0;
+	}else if(APP.selectedFinding>=APP.findings.length){
+		APP.selectedFinding = APP.findings.length -1;
+	}
 }
 Mammoapp.prototype.addFinding = function() {
 	var type = "";

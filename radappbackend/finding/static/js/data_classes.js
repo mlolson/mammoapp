@@ -196,7 +196,8 @@ function AnswerFinding(imgN, setN){
 	this.userType;
 	this.userDescription;
 	this.wasSubmitted;
-	//List of choices that the finding might be
+	//Question and list of answers.
+	this.question;
 	this.choices;//2D array of choices and and T/F answers
 	this.userChoices;//list of indices of choices selected by user.
 }
@@ -208,6 +209,7 @@ function AnswerImpression(syncedWithServer, description, finalPathology,
 	this.finalPathology = finalPathology;
 	this.biradsNum = biradsNum;
 	this.indications = indications;
+	this.question;
 	this.choices;//2D array of choices and and T/F answers
 	this.userChoices;//list of indices of choices selected by user.
 	this.init = init;

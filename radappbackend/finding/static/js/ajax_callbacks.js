@@ -24,6 +24,7 @@ function callback_checkFindingAnswers(data) {
 		newAF.yMLO = returnedAFs[i].yLocMLO;
 		newAF.type = returnedAFs[i].type;
 		newAF.description = returnedAFs[i].description; 
+		newAF.question = returnedAFs[i].question; 
 		newAF.corFinding = -1; 
 		newAF.userType = "";
 		newAF.userDescription = "";
@@ -53,7 +54,15 @@ function callback_checkFindingAnswers(data) {
 	APP.Answer_Impression.finalPathology = returnedAI[0].finalPathology;
 	APP.Answer_Impression.biradsNum = returnedAI[0].biradsNum;
 	APP.Answer_Impression.indications = returnedAI[0].indications;
+	APP.Answer_Impression.question = returnedAI[0].question;
 	APP.Answer_Impression.syncedWithServer = true;
+	var choices = returnedAI[0].choices;
+	var ch_clean = new Array();
+	for(var j=0; j<choices.length;j++){
+		ch_clean.push(choices[j]);
+	}
+	APP.Answer_Impression.choices = ch_clean;
+	
 	APP.drawScreen();
 	// constructImpressionsForm();
 }

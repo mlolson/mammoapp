@@ -53,6 +53,7 @@ class AnswerFinding(models.Model):
     yLocMLO = models.IntegerField()
     type = models.CharField(max_length=10)
     description = models.CharField(max_length=1000) 
+    question = models.CharField(max_length=300) 
     def __unicode__(self):
         return unicode(self.id)
 
@@ -71,7 +72,8 @@ class AnswerImpression(models.Model):
     biradsNum = models.IntegerField()
     description = models.CharField(max_length=1000)
     indications = models.CharField(max_length=100) 
-    finalPathology = models.CharField(max_length=100)      
+    finalPathology = models.CharField(max_length=100)
+    question = models.CharField(max_length=300)      
     def __unicode__(self):
         return unicode(self.id)
     

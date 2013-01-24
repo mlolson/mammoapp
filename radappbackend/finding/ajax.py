@@ -164,19 +164,23 @@ def returnAllAnswerFindings(request,setNum,imageNum):
         return simplejson.dumps({'message':message}) 
     
     ai = AnswerImpression.objects.get(image__imageNum=imageNum,setNum=setNum)
-    
-    af_list = AnswerFinding.objects.filter(image__imageNum=imageNum,setNum=setNum)  
+    choice_list = ai.choices.all()
+    cdat = []
+    for i in range(len(choice_list)):
+        cdat.append([choice_list[i].option,choice_list[i].isCorrect])
+
     data = {"AnswerFindings":[],
             "AnswerImpression":[{
                     "biradsNum":ai.biradsNum,
                     "description":ai.description,
                     "finalPathology":ai.finalPathology,
-                    "indications":ai.indications
+                    "indications":ai.indications,
+                    "question":ai.question,
+                    "choices":cdat
                                }]}
-    choice_list = ai.choices.all()
     
-    
-    
+
+    af_list = AnswerFinding.objects.filter(image__imageNum=imageNum,setNum=setNum) 
     for af in af_list:
         choice_list = af.choices.all()
         cdat = []
@@ -185,7 +189,7 @@ def returnAllAnswerFindings(request,setNum,imageNum):
             
         data['AnswerFindings'].append({"findingNum":af.findingNum,"isCCView":af.isCCView,"isMLOView":af.isMLOView,
                      "xLocCC":af.xLocCC,"yLocCC":af.yLocCC,"xLocMLO":af.xLocMLO,"yLocMLO":af.yLocMLO,
-                     "type":af.type,"description":af.description,"choices":cdat})
+                     "type":af.type,"description":af.description,"question":af.question,"choices":cdat})
         
     return simplejson.dumps(data)
         
