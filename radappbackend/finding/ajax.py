@@ -56,7 +56,18 @@ def addAnswerFinding(request,imageNum,setNum,findingNum,isCCView,isMLOView,xLocC
         message = "image does not exist"
         return simplejson.dumps({'message':message})      
 
-    newFind = AnswerFinding(image=image,setNum=setNum,findingNum=findingNum,isCCView=isCCView,isMLOView=isMLOView,xLocCC=xLocCC,yLocCC=yLocCC,xLocMLO=xLocMLO,yLocMLO=yLocMLO,type=ftype,description=description)
+    newFind = AnswerFinding(image=image,
+                            setNum=setNum,
+                            findingNum=findingNum,
+                            isCCView=isCCView,
+                            isMLOView=isMLOView,
+                            xLocCC=xLocCC,
+                            yLocCC=yLocCC,
+                            xLocMLO=xLocMLO,
+                            yLocMLO=yLocMLO,
+                            type=ftype,
+                            description=description,
+                            question='Sup?')
     newFind.save()   
     message = "success"
     return simplejson.dumps({'message':message})
@@ -76,7 +87,12 @@ def addAnswerImpression(request,imageNum,setNum,biradsNum,description,finalPatho
         message = "image does not exist"
         return simplejson.dumps({'message':message})  
             
-    newImp = AnswerImpression(image=image,setNum=setNum,biradsNum=biradsNum,description=description,finalPathology=finalPathology)
+    newImp = AnswerImpression(image=image,
+                              setNum=setNum,
+                              biradsNum=biradsNum,
+                              description=description,
+                              finalPathology=finalPathology,
+                              question='What is this?')
     newImp.save()
     message = "success"
     return simplejson.dumps({"message":message})
