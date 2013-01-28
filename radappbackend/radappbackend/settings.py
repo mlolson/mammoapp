@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/matt/workspace/radappbackend/db/sqlite3.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/matt/workspace/radappbackend/db/sqlite3_2.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'dojango.middleware.DojoCollector', # not DojoAutoRequireMiddleware anymore!
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -139,8 +140,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'dajaxice',
+    'dojango',
     'finding',
     'registration',
+    'formapp',
 )
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
@@ -155,6 +158,13 @@ DAJAXICE_MEDIA_PREFIX = "dajaxice"
 DAJAXICE_DEBUG = True
 DAJAXICE_JS_DOCSTRINGS = True
 
+DOJANGO_DATAGRID_ACCESS = (
+  'formapp.Record1',
+  'formapp.Record2',
+  'formapp.Record3',
+  'formapp.Team',
+)
+DOJANGO_DOJO_THEME = "soria"
 #DAJAXICE_NOTIFY_EXCEPTIONS = True
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

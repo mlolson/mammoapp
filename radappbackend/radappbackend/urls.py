@@ -27,7 +27,13 @@ urlpatterns = patterns('',
     url(r'^answers/$', 'finding.views.answerform'),
     url(r'^$', 'finding.views.home'),
     url(r'^about', 'finding.views.about'),
-    (r'^mammo/score/(\d{1})/(\d{1})/$', 'finding.views.score'),
+    url(r'^form/$', 'formapp.views.form'),
+    url(r'^form/export/$', 'formapp.views.exportToCSV'),
+    
+    url(r'^dojango/', include('dojango.urls')),
+    url(r'^simpleajaxset', 'formapp.views.simpleajaxset'),
+
+    url(r'^mammo/score/(\d{1})/(\d{1})/$', 'finding.views.score'),
     #url(r'^form/$', 'finding.views.form'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

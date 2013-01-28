@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Simple Form Application</title>
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dijit/themes/claro/claro.css"
+	>
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/resources/dojo.css" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojox/grid/resources/claroGrid.css" />	
+
+<link rel="stylesheet" type="text/css"
+	href="{{STATIC_URL}}css/formapp_custom_styles.css">
+<script>
+	window.STATIC_URL = '{{STATIC_URL}}';
+</script>
+
+{% load dajaxice_templatetags %} {% dajaxice_js_import %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js" data-dojo-config="isDebug: true, async: true, parseOnLoad: true"></script>
+
+</head>
+<body class="claro">
+	<div id="container">
+	<H1><u>Basic Dojo CRUD Application</u></H1>
+		<div style="height: 45px; width: 600px">
+			<button id="createRecordBtn"></button>
+			<button id="exportRecordsBtn"></button>
+		<br><b>Selected Record:</b>
+		</div>
+
+		<div id="record1div">
+			<div class="formlabel">
+				<div>
+					Record ID:<span id="id_lbl"></span>
+				</div>
+				<div>
+					Created By:<span id="creator_lbl"></span>
+				</div>
+				<div>
+					Date Created:<span id="date_lbl"></span>
+				</div>
+			</div>
+			<div id="cbox_container">
+				<span style="padding-left: 15px"><U>Checkbox Data</U></span>
+				<div class="formelement">
+					<input type="checkbox" id="cbox0"
+						data-dojo-type="dijit/form/CheckBox"> <label for="cbox0">Choice
+						1</label>
+				</div>
+				<div class="formelement">
+					<input type="checkbox" id="cbox1"
+						data-dojo-type="dijit/form/CheckBox"> <label for="cbox1">Choice
+						2</label>
+				</div>
+				<div class="formelement">
+					<input type="checkbox" id="cbox2"
+						data-dojo-type="dijit/form/CheckBox"> <label for="cbox2">Choice
+						3</label>
+				</div>
+			</div>
+			<div id="textfield_container">
+				<span style="padding-left: 40px"><U>Text Data</U></span>
+				<div class="inputbox">
+					<label for="description">Description:</label> <input
+						id="description" data-dojo-type="dijit/form/TextBox"
+						data-dojo-props="placeHolder:''">
+				</div>
+				<div class="inputbox">
+					<label for="text1">Text Data:</label> <input id="text1"
+						data-dojo-type="dijit/form/TextBox"
+						data-dojo-props="placeHolder:''">
+				</div>
+			</div>
+			<div id="numfield_container">
+			<span style="padding-left: 40px"><U>Integer Data</U></span>
+				<div class="inputbox">
+					<label for="num1">Integer 1:</label> <input
+						data-dojo-type="dijit/form/NumberSpinner" id="num1"
+						data-dojo-props="smallDelta:10, constraints:{min:-1000000,max:1000000,places:0}"
+						name="someNumber" />
+				</div>
+				<div class="inputbox">
+					<label for="num2">Integer 2:</label> <input
+						data-dojo-type="dijit/form/NumberSpinner" id="num2"
+						data-dojo-props="smallDelta:10, constraints:{min:-1000000,max:1000000,places:0}"
+						name="someNumber" />
+				</div>
+			</div>
+		
+		<div id="radio_container">
+			<ul style="list-style-type: none">
+				<span style="padding-left: 20px"><U>Radio Data</U></span>
+				<li><input id="radio1" type="radio" name="rad1" value="radio1"
+					data-dojo-type="dijit/form/RadioButton"> <label
+					for="radio1">Radio Choice 1</label></li>
+				<li><input id="radio2" type="radio" name="rad1" value="radio2"
+					data-dojo-type="dijit/form/RadioButton"> <label
+					for="radio2">Radio Choice 2</label></li>
+				<li><input id="radio3" type="radio" name="rad1" value="radio3"
+					data-dojo-type="dijit/form/RadioButton"> <label
+					for="radio3">Radio Choice 3</label></li>
+			</ul>
+		</div>
+		<div id="button_footer">
+				<button id="saveBtn"></button>
+				<button id="deleteBtn"></button>
+			<img id="ajax_gif" src="{{STATIC_URL}}media/icons/ajax-loader.gif" style="display:none; float:right;">
+		</div>
+		
+		</div>
+		<div id="grid_lbl"></div> 
+		
+		<div id="grid"></div>
+	
+	</div>
+
+<script>
+require(["dojo/parser",
+         "dijit/form/Select",
+         "dijit/form/NumberSpinner", 
+         "dijit/form/TextBox",
+         "dijit/form/SimpleTextarea",
+         "dijit/form/RadioButton", 
+         "dojo/on", 
+         "dijit/registry",
+         "dijit/form/CheckBox",
+         "dojo/date/stamp"]); 
+</script>
+<script type="text/javascript" src="{{STATIC_URL}}js/formapp.js"></script>
+
+
+</body>
+
+</html>
