@@ -44,12 +44,12 @@ require(["dojo/ready", "dijit/form/Button", "dojo/dom"], function(ready, Button,
         var exportRecordsBtn = new Button({
             label: "Export Records as .CSV",
             onClick: function(){
-            	window.location.href='/form/export/';
+            	window.location.href='/recordapp/export/';
             }
         }, "exportRecordsBtn");
     });
 });    
-     
+
 var Grid, Store, Ostore,CurrentRecord;
 
 function callback_getAllRecords(data){
@@ -64,8 +64,12 @@ function createNewRecord(){
 	CurrentRecord.id="";
 	dijit.byId("saveBtn").set('disabled', false);
 	dijit.byId("deleteBtn").set('disabled', false);
-	dojo.byId("id_lbl").innerHTML = "  <b>New Unsaved record</b>";
-	dojo.byId("creator_lbl").innerHTML =  "  <b>Guest</b>";
+	dijit.byId("description").set('disabled', false);
+	dijit.byId("text1").set('disabled', false);
+	dijit.byId("num1").set('disabled', false);
+	dijit.byId("num2").set('disabled', false);
+	dojo.byId("id_lbl").innerHTML = "  <b>New Unsaved Record</b>";
+	dojo.byId("creator_lbl").innerHTML =  "  <b>Anonymous</b>";
 	var date = new Date();
 	var datestr = dojo.date.stamp.toISOString(date).split("T")[0];
 	dojo.byId("date_lbl").innerHTML = "  <b>"+datestr +"</b>";
@@ -84,8 +88,32 @@ function saveRecord(){
 	
 	CurrentRecord.description = dojo.byId("description").value;
 	CurrentRecord.text_data = dojo.byId("text1").value;
-	CurrentRecord.number1 = dojo.byId("num1").value.replace(",","");
-	CurrentRecord.number2 = dojo.byId("num2").value.replace(",","");	
+	CurrentRecord.number1 = dojo.byId("num1").value.replace(/(,)/g,"");
+	CurrentRecord.number2 = dojo.byId("num2").value.replace(/(,)/g,"");	
+	
+	//console.log("desc ="+CurrentRecord.description);
+	//console.log("text ="+CurrentRecord.text_data);
+	//console.log("num 1="+CurrentRecord.number1);
+	//console.log("num 2="+CurrentRecord.number2);
+	
+	if(CurrentRecord.description ==""){
+		alert("Description Required");
+		return;
+	}
+	if(CurrentRecord.text_data ==""){
+		alert("Text data Required");
+		return;
+	}
+	var ns = CurrentRecord.number1;
+	if(isNaN(ns) || parseInt(ns)!= (+ns)){
+		alert("Integer box 1 must contain an integer.");
+		return;	
+	}
+	ns = CurrentRecord.number2;
+	if(isNaN(ns) || parseInt(ns)!= (+ns)){
+		alert("Integer box 2 must contain an integer.");
+		return;	
+	}
 	
 	var radio_choice = -1;
 	if(dijit.byId("radio1").checked){
@@ -191,9 +219,7 @@ function callback_deleteRecord(data){
 		alert(data.message);
 		return;
 	}
-	console.log("data.id ="+data.id+"   "+(data.id+1));
 	Store.query({id:data.id}).forEach(function(rec){
-		//console.log("removige id "+Store.getIdentity(rec));
 		  Store.remove(Store.getIdentity(rec));
 	});	
 	
@@ -211,11 +237,19 @@ function displayRecord(targid){
 		record = Store.query({id:targid});
 		dijit.byId("saveBtn").set('disabled', false);
 		dijit.byId("deleteBtn").set('disabled', false);
+		dijit.byId("description").set('disabled', false);
+		dijit.byId("text1").set('disabled', false);
+		dijit.byId("num1").set('disabled', false);
+		dijit.byId("num2").set('disabled', false);
 	}else{
 		Grid.selection.setSelected(Grid.selection.selectedIndex, false);
 	    Grid.render();
 	    dijit.byId("saveBtn").set('disabled', true);
 		dijit.byId("deleteBtn").set('disabled', true);
+		dijit.byId("description").set('disabled', true);
+		dijit.byId("text1").set('disabled', true);
+		dijit.byId("num1").set('disabled', true);
+		dijit.byId("num2").set('disabled', true);
 	    
 		record = {id:"none",
 				last_to_update:"",
@@ -241,7 +275,6 @@ function displayRecord(targid){
 		dojo.byId("text1").value = rec.text_data;
 		dojo.byId("num1").value = rec.number1;
 		dojo.byId("num2").value = rec.number2;
-		console.log("rec.radio_choice = "+rec.radio_choice);
 		if(rec.radio_choice ==0){
 			dijit.byId("radio1").set("checked",true);
 			dijit.byId("radio2").set("checked",false);
