@@ -192,6 +192,8 @@ def returnAllAnswerFindings(request,setNum,imageNum):
                     "finalPathology":ai.finalPathology,
                     "indications":ai.indications,
                     "question":ai.question,
+                    "extraImageDescription":ai.extraImageDescription,
+                    "patientInfo":ai.patientInfo,
                     "choices":cdat
                                }]}
     

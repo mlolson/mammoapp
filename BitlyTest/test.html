@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
+<script>
+
+
+var roster = [
+              {first_name:"Bit", last_name:"Lee", website:"http://bitly.com"},
+              {first_name:"Face", last_name:"Book", website:"http://facebook.com"},
+              {first_name:"Ama", last_name:"Zon", website:"http://amazon.com"},
+              {first_name:"Twit", last_name:"Ter", website:"http://twitter.com"}
+            ];
+var nodes= document.getElementById("roster").childNodes;
+
+for(var i=0;i<nodes.length;i++){
+	nodes[i].onclick = function(e) {
+		var element = e.target || e.srcElement;
+		var fname, lname;
+		for(var j=0;j<roster.length;j++){
+			if(roster[i].website.indexOf(element.innerHTML)>-1){
+				alert(roster[i].first_name+" "+roster[i].last_name);
+				return false;
+			}
+		}
+	 	return false;
+	}	 		
+}
+
+/* document.onclick = function(e) {
+ 	e = e || window.event;
+ 	var element = e.target || e.srcElement;
+
+ 	
+ 	////console.log(element.getParent().getParent().id);
+ 	
+ 	if (element.tagName == 'A') {
+ 		console.log("ID" + element);
+
+ 		for ( var i = 0; i < roster.length; i++) {
+ 			if (element.href == roster[i].website + "/") {
+ 				alert(roster[i].first_name + " " + roster[i].last_name);
+ 			}
+ 		}
+ 	}
+ 	return false;
+};
+   */      
+    
+</script>
+
+</head>
+<body>
+
+<ul id="roster">
+  <li><a href="#">bitly.com</a></li>
+  <li><a href="http://facebook.com">facebook.com</a></li>
+  <li><a href="http://amazon.com">amazon.com</a></li>
+  <li><a href="http://twitter.com">twitter.com</a></li>
+</ul>
+<script>
+var roster = [
+              {first_name:"Bit", last_name:"Lee", website:"http://bitly.com"},
+              {first_name:"Face", last_name:"Book", website:"http://facebook.com"},
+              {first_name:"Ama", last_name:"Zon", website:"http://amazon.com"},
+              {first_name:"Twit", last_name:"Ter", website:"http://twitter.com"}
+            ];
+
+
+var nodes= document.getElementById("roster").childNodes;
+
+
+for(var i=0;i<nodes.length;i++){
+	nodes[i].onclick = function(e) {
+		var element = e.target || e.srcElement;
+		var fname, lname;
+		for(var j=0;j<roster.length;j++){
+			if(roster[j].website.indexOf(element.innerHTML)>-1){
+				alert(roster[j].first_name+" "+roster[j].last_name);
+				return false;
+			}
+		}
+	 	return false;
+	}	 		
+}
+
+
+
+
+/* document.onclick = function(e) {
+ 	e = e || window.event;
+ 	var element = e.target || e.srcElement;
+
+ 	
+ 	////console.log(element.getParent().getParent().id);
+ 	
+ 	if (element.tagName == 'A') {
+ 		console.log("ID" + element);
+
+ 		for ( var i = 0; i < roster.length; i++) {
+ 			if (element.href == roster[i].website + "/") {
+ 				alert(roster[i].first_name + " " + roster[i].last_name);
+ 			}
+ 		}
+ 	}
+ 	return false;
+};
+   */      
+    
+</script>
+
+
+
+</body>
+</html>

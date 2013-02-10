@@ -102,13 +102,18 @@ function but_deleteFinding() {
 }
 function but_checkFindingAnswers() {
 
-	APP.User_Impression.description = document
-			.getElementById("impressions_box").value;
-	APP.User_Impression.indications = document
-			.getElementById("indications_box").value;
-	APP.User_Impression.finalPathology = document
-			.getElementById("final_path_box").value;
-
+	//APP.User_Impression.description = document
+	//		.getElementById("impressions_box").value;
+	//APP.User_Impression.indications = document
+	//		.getElementById("indications_box").value;
+	//APP.User_Impression.finalPathology = document
+	//		.getElementById("final_path_box").value;
+	
+	if(APP.numFoundAnswerFindings < APP.answerfindings.length){
+		alert("There is "+ (APP.answerfindings.length - APP.numFoundAnswerFindings)+" finding that has not been identified and submitted.");
+		return;
+	}
+	
 	var radios = document.getElementsByName('radio1');
 	for ( var i = 0, length = radios.length; i < length; i++) {
 		if (radios[i].checked) {
@@ -119,6 +124,20 @@ function but_checkFindingAnswers() {
 		alert("Please indicate BIRADS number.");
 		return;
 	}
+	var selected = new Array();
+	//var checkboxArr = new Array();
+	for(var i=0;i<APP.Answer_Impression.choices.length;i++){
+		var cb = document.getElementById("imp_choices_cb"+i)
+		//checkboxArr.push(cb);
+		if(cb.checked){
+			selected.push(true);
+		}else{
+			selected.push(false);
+		}
+	}
+	//APP.answerCheckboxes = checkboxArr;
+	APP.Answer_Impression.userChoices = selected;
+		
 	APP.DisplayAnswers = true;
 	APP.caseSubmitted = true;
 	APP.constructImpressionsForm();

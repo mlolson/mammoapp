@@ -55,6 +55,9 @@ function callback_checkFindingAnswers(data) {
 	APP.Answer_Impression.biradsNum = returnedAI[0].biradsNum;
 	APP.Answer_Impression.indications = returnedAI[0].indications;
 	APP.Answer_Impression.question = returnedAI[0].question;
+	APP.Answer_Impression.extraImageDescription = returnedAI[0].extraImageDescription;
+	APP.Answer_Impression.patientInfo = returnedAI[0].patientInfo;
+
 	APP.Answer_Impression.syncedWithServer = true;
 	var choices = returnedAI[0].choices;
 	var ch_clean = new Array();

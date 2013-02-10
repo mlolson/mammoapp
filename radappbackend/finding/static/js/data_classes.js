@@ -213,6 +213,8 @@ function AnswerImpression(syncedWithServer, description, finalPathology,
 	this.choices;//2D array of choices and and T/F answers
 	this.userChoices;//list of indices of choices selected by user.
 	this.init = init;
+	this.extraImageDescription;
+	this.patientInfo;
 
 	function init() {
 		this.syncedWithServer = false;

@@ -73,7 +73,9 @@ class AnswerImpression(models.Model):
     description = models.CharField(max_length=1000)
     indications = models.CharField(max_length=100) 
     finalPathology = models.CharField(max_length=100)
-    question = models.CharField(max_length=300)      
+    question = models.CharField(max_length=300)  
+    extraImageDescription = models.CharField(max_length=100)
+    patientInfo = models.CharField(max_length=300) 
     def __unicode__(self):
         return unicode(self.id)
     

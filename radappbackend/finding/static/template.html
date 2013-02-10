@@ -4,11 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Mammoapp Module</title>
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css">
 <script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css">
 <script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
 <script type="text/javascript"
 	src="{{STATIC_URL}}js/button_functions.js"></script>
+<script src="{{STATIC_URL}}js/jquery-1.7.2.js"></script>
+<script src="{{STATIC_URL}}js/lightbox/js/lightbox.js"></script>
+<link href="{{STATIC_URL}}js/lightbox/css/lightbox.css" rel="stylesheet">
+
 <script type="text/javascript" src="{{STATIC_URL}}js/ajax_callbacks.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/data_classes.js"></script>
 <script type="text/javascript" src="{{STATIC_URL}}js/mammoapp.js"></script>
@@ -35,8 +39,9 @@
 			onclick=but_submitAnswerFindingBox()>
 	</div>
 	<form id="impressionsForm">
-		Impressions Form
+		Case Summary
 		<hr>
+		<div id="patientInfoDiv"></div>
 		<div id="findingsHeader"></div>
 		<div id="findingsList"></div>
 		<div id="biradsDiv">
@@ -50,11 +55,11 @@
 				type="radio" class="formelement" name="radio1" value=6> 6
 		</div>
 		<div id="impressionDiv">
-			Impression <br>
+			<!--  Impression <br>
 			<textarea name="impression" id="impressions_box" cols="60" rows="5"></textarea>
-			<br>
+			<br>-->
 		</div>
-		<div id="indicationsDiv">
+		<!-- <div id="indicationsDiv">
 			Indications<br>
 			<textarea name="indications" id="indications_box" cols="60" rows="1"></textarea>
 			<br>
@@ -63,7 +68,8 @@
 			Guess Final Pathology<br>
 			<textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea>
 			<br>
-		</div>
+		</div>-->
+		
 		<div id="formFooter">
 			<input type="button" class="formelement" name="submit_Impression"
 				id="saveAndSubmitImpressionButton" value="Save & Submit"
@@ -81,18 +87,19 @@
 	<button type="button" class='button' id="spotMagButton"
 		onclick=but_SpotMagTool()>Spot Mag</button>
 	<button type="button" class='button' id="impressionButton"
-		onclick=but_constructImpressionsForm()>Show Impression</button>
+		onclick=but_constructImpressionsForm()>Show Case Summary
+	</button>
 	<button type="button" class='button' id='zoomOutButton'
 		onclick=but_zoomOut()>-</button>
 	<button type="button" class='button' id='zoomInButton'
 		onclick=but_zoomIn()>+</button>
-	<div style="position: relative; top: 0px; left: 0px;">
-		<canvas id="canvas_bottom" width="800" height="800"
+	<div style="position: relative; top: 0px; left: 0px; width:100%">
+		<canvas id="canvas_bottom" width=800 height=800
 			style="position: absolute;">
  Your browser does not support HTML5 Canvas. <a
 				href="http://google.com/chrome">Consider upgrading to Google Chrome.</a>
-</canvas>
-		<canvas id="canvas_top" width="800" height="800"
+		</canvas>
+		<canvas id="canvas_top" width=800 height=800
 			style="position: absolute; border: black 1px solid"></canvas>
 		<canvas id="canvas_obox1" width="0" height="0"
 			style="border: black 1px solid"></canvas>

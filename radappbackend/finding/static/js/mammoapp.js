@@ -42,6 +42,7 @@ function Mammoapp() {
 	this.selectedAnswerFinding;
 	this.numFoundAnswerFindings;
 	this.caseSubmitted;
+	this.impressionSubmitted;
 	this.maxRoiArea
 
 	this.eventMImgLoaded = eventMImgLoaded;
@@ -72,9 +73,14 @@ function Mammoapp() {
 		this.selectedAnswerFinding = -1;
 		this.numFoundAnswerFindings = 0;
 		this.caseSubmitted = false;
+		this.impressionSubmitted = false;
 
-		theCanvas_bottom.width = 800;
-		theCanvas_top.width = 800;
+		theCanvas_bottom.width =  document.width *0.8;
+		theCanvas_top.width = document.width *0.8;
+		WS.orientMag = 4;
+		
+		theCanvas_bottom.height =  750;
+		theCanvas_top.height = 750;
 
 		WS.windowHeight = cHeight;
 		WS.windowWidth = cWidth;
@@ -835,9 +841,7 @@ Mammoapp.prototype.displayAnswerFindingBox = function(ind, updateLoc) {
 		}
 		ansInt.innerHTML = html;
 		ansInt.style.visibility = "visible";
-		//ansForm.style.visibility = "visible";
-		//ansForm.style.height = "automatic";
-		//ansForm.style.width = '350px';
+		
 	}
 	ansDiv.style.visibility = "visible";
 	if (updateLoc) {
@@ -852,6 +856,11 @@ Mammoapp.prototype.closeAnswerFindingBox = function() {
 }
 
 Mammoapp.prototype.constructImpressionsForm = function() {
+	
+	var patientInfoDiv = document.getElementById("patientInfoDiv");
+	
+	patientInfoDiv.innerHTML = "<b><u>Patient Info</u></b>:<br>"+APP.Answer_Impression.patientInfo +"<hr>";
+	
 	var fdiv = document.getElementById("findingsList");
 	var findingsHeaderDiv = document.getElementById("findingsHeader");
 	var str = " finding";
@@ -862,8 +871,7 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 	}
 	findingsHeaderDiv.innerHTML = "You have found "
 			+ APP.numFoundAnswerFindings + " out of "
-			+ APP.answerfindings.length + str + "<br>Number or ROI's: "
-			+ APP.findings.length;
+			+ APP.answerfindings.length + str;
 	if (APP.numFoundAnswerFindings == APP.answerfindings.length) {
 		findingsHeaderDiv.style.color = '#66FF66';// Light green
 	} else {
@@ -877,27 +885,27 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 			var newDiv = document.createElement('div');
 			newDiv.style.width = '630px';
 			// newDiv.style.textAlign = 'center';
-			newDiv.innerHTML = '<u><b>Finding ' + (j + 1) + '</b></u><br>';
+			newDiv.innerHTML = '<u><b>Finding # ' + (j + 1) + '</b></u>: <br>';
 			fdiv.appendChild(newDiv);
 
 			// Append User and answer types.
 			newDiv = document.createElement('div');
 			newDiv.className = 'answerTextDivL';
 			
-			var str = "<u>Answer</u>: ";
+			var str = "Answer: ";
 			for(var i =0;i<af.choices.length; i++){
 				if(af.choices[i][1]){
 					str += af.choices[i][0] +"<br>";
 				}
 			}			
-			str += "<u>You chose</u>: ";
+			str += "You chose: ";
 			for(var i =0;i<af.userChoices.length;i++){
 				if(af.userChoices[i]){
 					str += af.choices[i][0];
 					if(af.choices[i][1]){
-						str+=" (correct +1)<br>";
+						str+=" (correct <b>+10 points</b>)<br>";
 					}else{
-						str+=" (incorrect +0)<br>";
+						str+=" (incorrect <b>+0 points</b>)<br>";
 					}
 					
 				}
@@ -911,15 +919,18 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 			newDiv.innerHTML = "<u>Description</u>:<br>"
 					+ af.description;
 			fdiv.appendChild(newDiv);
+			fdiv.appendChild(document.createElement("hr"));
 		}
 	}
 	var newDiv = document.createElement('div');
+	//newDiv.innerHTML = "<hr>";
 	newDiv.style.width = '630px';
-	newDiv.style.height = '30px';
-	//newDiv.innerHTML = '<hr>';
+	//newDiv.style.height = '30px';
 	fdiv.appendChild(newDiv);
 	// display any answerfindings that weren't "found"
 	// REALLY could use JQuery here instead of this long winded JS
+	
+	
 	if (APP.caseSubmitted) {
 		var ncorrectfindings = 0;
 		// List anything that was not found. May be made obsolete since we are
@@ -943,104 +954,168 @@ Mammoapp.prototype.constructImpressionsForm = function() {
 		var biradsDiv = document.getElementById("biradsDiv");
 		biradsDiv.innerHTML = "";
 		var newDiv = document.createElement('div');
+		var newSpan =document.createElement('span');
+		var newSpan2 =document.createElement('span');
+		var newSpan3 =document.createElement('span');
 		newDiv.className = 'answerTextDivL';
-		newDiv.innerHTML = "Your BIRADS#: " + APP.User_Impression.biradsNum
-		biradsDiv.appendChild(newDiv);
-		newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDivR';
-		newDiv.innerHTML = "Answer BIRADS#: " + APP.Answer_Impression.biradsNum;
-		biradsDiv.appendChild(newDiv);
-
-		if (APP.User_Impression.biradsNum == APP.Answer_Impression.biradsNum) {
-			biradsDiv.style.color = '#66FF66';// Light green
-		} else {
-			biradsDiv.style.color = '#FF3333';// Light red
+		newDiv.innerHTML = "<b><u>BIRADS#</u></b>: <br>";
+		newSpan.innerHTML = "Answer: "+ APP.Answer_Impression.biradsNum;
+		newSpan2.innerHTML = "<br>You chose: " + APP.User_Impression.biradsNum;
+		
+		if( APP.Answer_Impression.biradsNum ==  APP.User_Impression.biradsNum){
+			newSpan3.innerHTML = "  (Correct! <b>+20 points</b>)";
+		}else if(Math.abs(APP.Answer_Impression.biradsNum - APP.User_Impression.biradsNum) ==1){
+			newSpan3.innerHTML = "  (Close... <b>+10 points</b>)";
+		}else{
+			newSpan3.innerHTML = "  (Incorrect... <b>+0 points</b>)";
 		}
+		//biradsDiv.appendChild(newDiv);
 
+		//if (APP.User_Impression.biradsNum == APP.Answer_Impression.biradsNum) {
+		//	newSpan2.style.color = '#66FF66';// Light green
+		//} else {
+		//	newSpan2.style.color = '#FF3333';// Light red
+		//}
+		newDiv.appendChild(newSpan);
+		newDiv.appendChild(newSpan2);
+		newDiv.appendChild(newSpan3);
+		biradsDiv.appendChild(newDiv);
+		//biradsDiv.appendChild(document.createElement("hr"));
+
+		
 		var impressionDiv = document.getElementById("impressionDiv");
 		impressionDiv.innerHTML = "";
-		newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDivL';
-		newDiv.innerHTML = "Your Impression <br>";
-		var newText = document.createElement('textarea');
-		newText.cols = '35';
-		newText.rows = '8';
-		newText.value = APP.User_Impression.description;
-		newDiv.appendChild(newText);
-		impressionDiv.appendChild(newDiv);
+		
+		var html = "<b><u>"+APP.Answer_Impression.question +"</u></b><br>Answer: ";
+		var choices = APP.Answer_Impression.choices;
+		var userChoices = APP.Answer_Impression.userChoices;
+		var ansInt = document.createElement('div');
+		ansInt.className = "answerTextDivL";
+		
+		//ugly way of listing all the correct answers but it does the job.
+		for(var i=0;i<choices.length;i++){
+			if(choices[i][1]){
+				html += choices[i][0] + "<br>";
+			}
+		}
+		html+= "You Chose: ";
+		for(var i=0;i<userChoices.length;i++){
+			if(userChoices[i]){
+				html += choices[i][0];
+				if(choices[i][1]){	
+					html+=" (Correct! <b>+10 points</b>)<br>";	
+				}else{
+					html+=" (Incorrect <b>+0 points</b>)<br>";	
+				}
+			}
+		}
+		
+		ansInt.innerHTML = html;
 
+		for(var i=0;i<choices.length;i++){
+			
+			//html += choices[i][0] +", "
+			//var span =  document.createElement('span');
+			//span.style.color = 'white';
+			var checkbox = document.createElement('input');
+			checkbox.type = "checkbox";
+			checkbox.id = "checkbox"+i;
+			var label = document.createElement('label');
+			label.htmlFor = "checkbox"+i;
+			label.appendChild(document.createTextNode(choices[i][0]));
+			
+			if(userChoices[i]){
+				checkbox.checked = true;
+				//APP.answerCheckboxes[i].checked = true;
+				if(choices[i][1]){
+					label.style.color = '#66FF66';  //L green	
+				}else{
+					label.style.color = '#FF3333'; //L red
+				}
+			}else{
+				//APP.answerCheckboxes[i].checked = false;
+			}
+			if(choices[i][1]){
+				label.style.textDecoration = 'underline';
+			}	
+			
+			//span.appendChild(document.createTextNode(choices[i][0]));
+			//ansInt.appendChild(cb);
+			//ansInt.appendChild(span);
+			ansInt.appendChild(checkbox);
+			ansInt.appendChild(label);
+			
+			ansInt.appendChild(document.createElement('br'));
+		}
+				
+		impressionDiv.appendChild(ansInt);
+
+		
 		var newDiv2 = document.createElement('div');
+		
 		newDiv2.className = 'answerTextDivR';
-		newDiv2.innerHTML = "Answer Impression <br>";
-		var newText2 = document.createElement('textarea');
-		newText2.cols = '35';
-		newText2.rows = '8';
-		newText2.value = APP.Answer_Impression.description;
-		newDiv2.appendChild(newText2);
+		//var newText2 = document.createElement('textarea');
+		//newText2.cols = '35';
+		////newText2.rows = '8';
+		//newText2.value = APP.Answer_Impression.description;
+		//newDiv2.appendChild(newText2);
+		newDiv2.innerHTML = "<u>Impression:</u><br>"+APP.Answer_Impression.description;
 		impressionDiv.appendChild(newDiv2);
+		impressionDiv.appendChild(document.createElement("hr"));
 
-		var indicationsDiv = document.getElementById("indicationsDiv");
-		indicationsDiv.innerHTML = "";
-		var newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDivL';
-		newDiv.innerHTML = "Your Indications <br>";
-		var newText = document.createElement('textarea');
-		newText.cols = '35';
-		newText.rows = '1';
-		newText.value = APP.User_Impression.indications;
-		newDiv.appendChild(newText);
-		indicationsDiv.appendChild(newDiv);
-
-		var newDiv2 = document.createElement('div');
-		newDiv2.className = 'answerTextDivR';
-		newDiv2.innerHTML = "Answer Indications <br>";
-		var newText2 = document.createElement('textarea');
-		newText2.cols = '35';
-		newText2.rows = '1';
-		newText2.value = APP.Answer_Impression.indications;
-		newDiv2.appendChild(newText2);
-		indicationsDiv.appendChild(newDiv2);
-
-		var pathDiv = document.getElementById("finalPathologyDiv");
-		pathDiv.innerHTML = "";
-		var newDiv = document.createElement('div');
-		newDiv.className = 'answerTextDivL';
-		newDiv.innerHTML = "Your Pathology <br>";
-		var newText = document.createElement('textarea');
-		newText.cols = '35';
-		newText.rows = '1';
-		newText.value = APP.User_Impression.finalPathology;
-		newDiv.appendChild(newText);
-		pathDiv.appendChild(newDiv);
-
-		var newDiv2 = document.createElement('div');
-		newDiv2.className = 'answerTextDivR';
-		newDiv2.innerHTML = "Answer Pathology <br>";
-		var newText2 = document.createElement('textarea');
-		newText2.cols = '35';
-		newText2.rows = '1';
-		newText2.value = APP.Answer_Impression.finalPathology;
-		newDiv2.appendChild(newText2);
-		pathDiv.appendChild(newDiv2);
-
+		
 		document.getElementById("nextCaseButton").disabled = false;
 		document.getElementById("saveAndSubmitImpressionButton").disabled = true;
 
-	} else {
+	//If all findings have been found, show BIRADS and question box:
+	} else if(APP.numFoundAnswerFindings >= APP.answerfindings.length){
 		var biradsDiv = document.getElementById("biradsDiv");
-		var brHTML = "Choose BIRADS#: ";
+		var HTML = "Choose BIRADS#: ";
 		for ( var j = 0; j < 7; j++) {
-			brHTML += '<input type="radio" class="formelement" name="radio1" value='
+			HTML += '<input type="radio" class="formelement" name="radio1" value='
 					+ j + '> ' + j;
 		}
-		biradsDiv.innerHTML = brHTML;
+		biradsDiv.innerHTML = HTML;
 		biradsDiv.style.color = "white";
-		document.getElementById("impressionDiv").innerHTML = 'Impression <br><textarea name="impression" id="impressions_box" cols="60" rows="5"></textarea><br>';
-		document.getElementById("indicationsDiv").innerHTML = 'Indications<br><textarea name="indications" id="indications_box" cols="60" rows="1"></textarea><br>';
-		document.getElementById("finalPathologyDiv").innerHTML = 'Guess Final Pathology<br><textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea><br>';
-		document.getElementById("nextCaseButton").disabled = true;
-		document.getElementById("saveAndSubmitImpressionButton").disabled = false;
+		biradsDiv.appendChild(document.createElement("hr"));
 		
+		var questionDiv = document.createElement('div');
+		var impressionDiv = document.getElementById("impressionDiv");
+
+		var choices = APP.Answer_Impression.choices;
+		HTML = "<u>"+APP.Answer_Impression.question +"</u><br>";
+		for(var i=0;i<choices.length;i++){
+			HTML += "<input type='checkbox' name='imp_choices_cb' id='imp_choices_cb"+i+"'>"+choices[i][0]+"<br>";
+		}
+		questionDiv.innerHTML = HTML;
+		questionDiv.className ="answerTextDivL";
+		questionDiv.style.color = "white";
+		impressionDiv.appendChild(questionDiv);
+		
+		if(APP.Answer_Impression.extraImageDescription != "none"){
+			var span = document.createElement("span");
+			span.appendChild(document.createTextNode("Extra Image: "));
+			var extraimg = document.createElement('a');
+			extraimg.href = window.STATIC_URL +"media/set"+APP.setNum+"/"+APP.imageNum+"e.jpg";
+			extraimg.rel = "lightbox";
+			extraimg.title = APP.Answer_Impression.extraImageDescription;
+			extraimg.innerHTML = APP.Answer_Impression.extraImageDescription;
+			span.appendChild(extraimg);
+			impressionDiv.appendChild(span);
+		}
+		impressionDiv.appendChild(document.createElement("hr"));
+
+		document.getElementById("saveAndSubmitImpressionButton").disabled = false;
+		document.getElementById("nextCaseButton").disabled = true;
+		
+	} else {
+		document.getElementById("biradsDiv").innerHTML = "";		
+		document.getElementById("impressionDiv").innerHTML = "";
+		//document.getElementById("impressionDiv").innerHTML = 'Impression <br><textarea name="impression" id="impressions_box" cols="60" rows="5"></textarea><br>';
+		//document.getElementById("indicationsDiv").innerHTML = 'Indications<br><textarea name="indications" id="indications_box" cols="60" rows="1"></textarea><br>';
+		//document.getElementById("finalPathologyDiv").innerHTML = 'Guess Final Pathology<br><textarea name="finalPath" id="final_path_box" cols="60" rows="1"></textarea><br>';
+		document.getElementById("nextCaseButton").disabled = true;
+		document.getElementById("saveAndSubmitImpressionButton").disabled = true;		
 	}
 
 	document.getElementById("impressionsForm").style.visibility = 'visible';

@@ -5,6 +5,9 @@
 html,button,input,select,textarea {
 	color: #222;
 }
+input[type=button]:disabled{
+	color:#C0C0C0;
+}
 
 body {
 	font-size: 1em;
@@ -36,11 +39,11 @@ body {
 	left: 20px;
 	top: 50px;
 	width: 630px;
-	padding: 0px 20px 10px 10px;
+	padding: 10px 10px 10px 10px;
 	background: rgba(0, 0, 0, 0.9);
 	border: thin solid rgba(0, 0, 0, 0.6);
 	color: #FFFFFF;
-	font-size: 12px;
+	font-size: 1.0em;
 	cursor: pointer;
 	z-index: 1002;
 	visibility: hidden;
@@ -53,7 +56,6 @@ body {
 
 #findingsHeader {
 	width: 630px;
-	font-size: 1.2em;
 	font-style: bold;
 }
 
@@ -61,32 +63,27 @@ body {
 	width: 630px;
 	float: left;
 	margin: 5px 0px 5px 0px;
-	font-size: 1.2em;
 }
 
 #biradsDiv {
 	position: relative;
 	float: left;
 	width: 630px;
-	font-size: 1.2em;
 }
 
 #impressionDiv {
 	float: left;
 	width: 630px;
-	font-size: 1.2em;
 }
 
 #indicationsDiv {
 	float: left;
 	width: 630px;
-	font-size: 1.2em;
 }
 
 #finalPathologyDiv {
 	float: left;
 	width: 630px;
-	font-size: 1.2em;
 }
 
 .findingElement {
@@ -174,6 +171,7 @@ hr {
 	margin: 1em 0;
 	padding: 0;
 	width: 630px;
+	margin-top:10px;
 }
 
 /*
