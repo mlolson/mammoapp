@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logged In</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>
+	window.STATIC_URL = '{{STATIC_URL}}';
+</script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+</head>
+<body>
+	<h1>Mammoapp home page for {{ username }}</h1>
+	<div id='container'>
+		Available Modules:
+		<div id='setSelectBox' class='button'
+			onclick="window.location.href='/mammo/'">
+			<b><u>Test Set</u></b><br> <b>Description:</b> 5 mammograms from
+			UW radiology website. For testing purposes only, findings not
+			necessarily correct.<br> <b># of images:</b> 5<br> <b>Created
+				by:</b> Matt Olson<br>
+		</div>
+		<hr>
+		<button type="button" id="b2" class='button' style="width: 250px"
+			onclick="window.location.href='/mammoupload/'">Upload
+			Training Set</button>
+	</div>
+	<p>
+		<br>Logged in as {{ username }} <a class='homelinks'
+			href="/accounts/logout/">Log Out</a>
+	</p>
+
+</body>
+</html>

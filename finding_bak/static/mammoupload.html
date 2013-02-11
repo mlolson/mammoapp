@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--{% load dajaxice_templatetags %}-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logged In</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>
+	window.STATIC_URL = '{{STATIC_URL}}';
+</script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+	<h1>Breast Imaging Web Simulator (beta)</h1>
+	<p>
+		Sorry, user uploading of teaching sets is restricted for the time
+		being. :( <br>
+		<br> <a class='homelinks' href="/userhome/">Back</a> <br>
+	</p>
+	<br>
+	<p>
+		Logged in as {{ username }} <a class='homelinks'
+			href="/accounts/logout/">Log Out</a>
+	</p>
+</body>
+</html>

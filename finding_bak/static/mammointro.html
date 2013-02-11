@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--{% load dajaxice_templatetags %}-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logged In</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>
+	window.STATIC_URL = '{{STATIC_URL}}';
+</script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+	<h1>Introduction</h1>
+	<p>
+		<img src="{{STATIC_URL}}media/icons/mammo_sccap.png" width="700px"><br>
+	</p>
+	<br>
+	<h2>Summary</h2>
+	<p>Mammoapp is a game that attempts to mimic a mammogram batch
+		reading session in your web browser. A user or institution can upload
+		mammogram teaching sets and marks findings using the simple mammogram
+		web viewer tool. These findings include information about the
+		location, type, and description of the lesion. An impression for the
+		mammogram is also entered, as are indications and final pathology if
+		known. (Note: these paramaters are subject to change, and suggestions
+		are welcome.) Another user can the "read" the set. The goal is to
+		correctly identify as many "answer" findings as possible using the web
+		viewer tools. Once the user submits their findings, feedback is
+		immediately shown.</p>
+	<h2>Navigation</h2>
+	<p>Two views of each mammogram are available: the user can switch
+		between the mediolateral-oblique view (MLO) and the chest compression
+		view (CC) by clicking the orientation boxes on the right. (Pink
+		arrow). You can also move the window around the image by clicking and
+		dragging in the orientation boxes.</p>
+	<p>The canvas is zoomed in and out using the mouse wheel or,
+		alternatively, using the two buttons in the upper right corner may be
+		user (Blue arrow).</p>
+	<h2>Marking Findings</h2>
+	<p>To mark a finding, you may use one of the Region of Interest
+		(ROI) tools (Red Arrow). To make a rectangle ROI, click the "Rect ROI"
+		button, click on the canvas, and drag. To define a polygon ROI, click
+		the "Poly ROI" button, click on the canvas to mark your starting
+		point, then continue marking points around the ROI. Close the ROI by
+		clicking on your starting point.</p>
+	<p>Once you complete an ROI, you will be asked to provide
+		information about the finding. Fill out the description and mark the
+		type, then click "Save & Close". You may select an existing finding by
+		clicking on its label. This will bring up the dialog box, allowing you
+		to alter or delete it.</p>
+	<h2>Entering an Impression</h2>
+	<p>To finish a case, click the "Show Impression" button. This will
+		bring up a dialog showing a list of all your findings, plus a place to
+		mark a BIRADS category, impression, indications, and final pathology.
+		When you are finished press "Save & Submit".</p>
+	<h2>Scoring</h2>
+	<p>
+		In this beta version the software scores you only on whether you
+		correctly located the findings.<br>
+		<br>
+		<button type="button" id="b1" class='button' style="width: 250px"
+			onclick="window.location.href='/mammo/'">Begin</button>
+		<br>
+	</p>
+	<br>
+	<p>
+		Logged in as {{ username }} <a class='homelinks'
+			href="/accounts/logout/">Log Out</a>
+	</p>
+</body>
+</html>

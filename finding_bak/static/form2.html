@@ -1,0 +1,82 @@
+{% extends "dojango/base.html" %}
+{% load dojango_grid %}
+{% block dojango_page_title %} Test form {% endblock %}
+
+{% block dojango_header_extra %}
+{% load dajaxice_templatetags %}
+{% dajaxice_js_import %}
+<script>window.STATIC_URL = '{{STATIC_URL}}'; </script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+function userFormSubmit(){
+	Dajaxice.formapp.getRecord1List(callback_getRecordList,{});
+}
+function callback_getRecordList(data){
+	var records_list = data.records;
+	for(var i=0;i<records_list.length;i++){
+		console.log(records_list[i].name);
+	}
+	
+}
+
+require([
+         "dojox/grid/DataGrid",
+         "dojo/store/Memory",
+         "dojo/data/ObjectStore",
+         "dojo/domReady!"
+     ], function(DataGrid, Memory, ObjectStore, request){
+         var grid,  dataStore;
+         
+         Dajaxice.formapp.getRecord1List(
+         function(data){
+             dataStore = new ObjectStore({ objectStore:new Memory({ data: data.items }) });
+      
+             grid = new DataGrid({
+                 store: dataStore,
+                 query: { id: "*" },
+                 queryOptions: {},
+                 structure: [
+                     { name: "name", field: "name", width: "25%" },
+   	                 { name: "date", field: "date_last_updated", width: "25%" },
+                     
+                 ]
+             }, "grid");
+             grid.startup();
+         },{});
+    });
+
+</script>
+{% endblock %}
+
+
+{% block dojango_content %}
+<H1>Records:</H1>
+<!--  <div style="height:100px; width:800px">
+
+				<label for="recordSelect">View by Type:</label>
+				<select id="recordSelect" data-dojo-type="dijit/form/Select" name="recordSelect"
+					data-dojo-props="
+						onChange: function(value){
+							
+						}">
+					<option value="" selected="selected">Select a record type</option>
+					<option value="1">Record Type 1</option>
+					<option value="2">Record Type 2</option>
+					<option value="3">Record Type 3</option>
+				</select>
+</div>
+<script>
+require(["dijit/form/Select", 
+         "dojo/parser"]);
+</script>-->
+<div id="info">Info</div>
+<div id="grid"></div>
+<!--  <div style="height:600px; width:800px">
+    {% datagrid formapp Record1 %}
+    	list_display = ('name','date_last_updated')
+	{% enddatagrid %}
+</div>-->
+
+
+{% endblock %}

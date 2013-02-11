@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--{% load dajaxice_templatetags %}-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/home.css">
+<script>
+	window.STATIC_URL = '{{STATIC_URL}}';
+</script>
+<script src="{{STATIC_URL}}js/modernizr.custom.70040.js"></script>
+<!--{% dajaxice_js_import %}-->
+</head>
+<body>
+	<div id='container'>
+		<img src="{{STATIC_URL}}media/icons/titleimage.jpg">
+		<div id="homeButtons">
+			<button type="button" id="b1" class='button'
+				onclick="window.location.href='/accounts/login/'">Log In</button>
+			<button type="button" id="b2" class='button'
+				onclick="window.location.href='/accounts/register/'">Register</button>
+		
+		</div>
+		
+		<p>
+		<a href="/recordapp/" style="padding-left:85px;">**Dojo/Django database CRUD application**</a>
+		</p>
+		
+
+		<p>
+			<br>
+			<br>
+			<br>
+		<hr>
+		<img src="{{STATIC_URL}}media/icons/chrome_firefox_logo.png"
+			width="80px" alt="Chrome or FF please" style="margin-left: 50px">
+		Requires HTML5 canvas compatible browser. <a href='/about/'>About</a>
+		</p>
+	</div>
+</body>
+</html>
